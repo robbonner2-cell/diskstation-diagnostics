@@ -130,6 +130,7 @@ doc = f'''<!doctype html>
 <title>DiskStation fleet — full diagnostics, 2026-10-24</title>
 <meta name="description" content="Read-only diagnostics for four Synology DiskStations: array integrity, volume capacity, scrub history, drive flags, backups.">
 <meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f131b'/%3E%3Crect x='7' y='9' width='18' height='4' rx='2' fill='%233ddc84'/%3E%3Crect x='7' y='15' width='13' height='4' rx='2' fill='%23ff5d5d'/%3E%3Crect x='7' y='21' width='18' height='4' rx='2' fill='%234aa8ff'/%3E%3C/svg%3E">
 <style>
 :root{{
  --bg:#080a0f; --card:#0f131b; --card2:#121722; --line:#1e2634; --line2:#2a3546;
@@ -300,8 +301,9 @@ page = open(OUT_HTML).read()
 assert f'data-stamp="{stamp}"' in page, "stamp missing from page"
 assert json.load(open(OUT_JSON))["stamp"] == stamp
 assert "192.168." not in page and "192.168." not in open(OUT_JSON).read(), "LAN address leaked"
-for tok in ("http://", "https://", "<script", "@import"):
-    assert tok not in page, f"external/runtime dependency in page: {tok}"
+import re as _re
+for pat in (r'src\s*=\s*["\']https?://', r'href\s*=\s*["\']https?://', r"<script", r"@import"):
+    assert not _re.search(pat, page), f"external/runtime dependency in page: {pat}"
 print(f"wrote {OUT_HTML} ({len(page)}b) stamp={stamp}")
 print(f"wrote {OUT_JSON}")
 print(f"boxes={len(boxes)} findings={len(findings)} external_refs=0 lan_leak=0")

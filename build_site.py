@@ -381,8 +381,14 @@ data_txt = json.dumps({"stamp": stamp, **m}, indent=1)
 # --- self-check BEFORE any write: a refused build must not touch the artifacts ---
 assert f'data-stamp="{stamp}"' in doc, "stamp missing from page"
 assert json.loads(data_txt)["stamp"] == stamp, "stamp mismatch between page and data"
+assert sum(int(b["n_disks"]) for b in boxes) == T["disks"], "box drive counts do not sum to the fleet total"
 assert cap_html.count('<i class="cell"></i>') + cap_html.count('<i class="cell bad"></i>') == T["disks"], "spindle count != fleet disk count"
-assert cap_html.count('<i class="cell bad"></i>') == sum(len(b["bad_disks"]) for b in boxes), "flagged drive count mismatch"
+for b in boxes:
+    k = len(b["bad_disks"])
+    assert k <= int(b["n_disks"]), f"{b['id']} reports more flagged drives than drives"
+    assert len({d["id"] for d in b["bad_disks"]}) == k, f"{b['id']} lists the same drive twice"
+    grid = '<i class="cell"></i>' * (int(b["n_disks"]) - k) + '<i class="cell bad"></i>' * k
+    assert f'<div class="cells">{grid}</div>' in cap_html, f"{b['id']} grid does not match its own counts"
 assert abs(t_used - T["used"]) < 0.6 and abs(t_log - T["logical"]) < 0.6, "capacity sums disagree with totals"
 assert "192.168." not in doc, "LAN address leaked into page"
 assert "192.168." not in data_txt, "LAN address leaked into data"

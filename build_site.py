@@ -136,10 +136,10 @@ for b in boxes:
     cells = '<i class="cell"></i>' * (n - k) + '<i class="cell bad"></i>' * k
     degraded = any(v["status"] != "normal" for v in b["vols"].values())
     cls = "red" if degraded else ("amber" if k else "green")
-    fl = f" · <b class=\"fl\">{k} flagged</b>" if k else " · healthy"
+    fl = f"{k} flagged" if k else "healthy"
     clusters.append(f'''<div class="cluster {cls}">
-   <div class="chead"><b>{b['id'].upper()}</b>
-     <span>{n} drives · {u:.0f} used of {lg:.0f} TB{fl}</span></div>
+   <div class="chead"><b>{b['id'].upper()}</b><span class="st">{fl}</span></div>
+   <div class="csub">{n} drives · {u:.0f} used of {lg:.0f} TB</div>
    <div class="cells">{cells}</div></div>''')
 
 fill_pct = t_used / t_log * 100
@@ -303,13 +303,16 @@ footer{{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-co
 .sw.bad{{background:color-mix(in srgb,var(--red) 55%,transparent);box-shadow:0 0 8px var(--red)}}
 .spindles{{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}}
 .cluster{{border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:#0b0f16}}
-.chead{{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:7px;flex-wrap:wrap}}
+.chead{{display:flex;justify-content:space-between;align-items:baseline;gap:8px;min-height:15px;margin-bottom:2px}}
+.csub{{font-family:var(--mono);font-size:9.5px;color:var(--dim2);min-height:26px;line-height:1.35;margin-bottom:6px}}
 .chead b{{font-size:10.5px;letter-spacing:.1em}}
 .chead span{{font-family:var(--mono);font-size:9.5px;color:var(--dim2)}}
-.chead .fl{{color:var(--red)}}
+.cluster.red .chead .st{{color:var(--red)}}
+.cluster.green .chead .st{{color:var(--green)}}
+.cluster.amber .chead .st{{color:var(--amber)}}
 .cluster.red .chead b{{color:var(--red)}} .cluster.amber .chead b{{color:var(--amber)}}
 .cluster.green .chead b{{color:var(--green)}}
-.cells{{display:flex;flex-wrap:wrap;gap:3px}}
+.cells{{display:flex;flex-wrap:wrap;gap:3px;align-content:flex-start}}
 .cell{{width:12px;height:15px;border-radius:2px;background:linear-gradient(180deg,#37445c,#232c3b);
  border:1px solid #4a5878;display:block}}
 .cell.bad{{background:color-mix(in srgb,var(--red) 45%,#2b3648);border-color:var(--red);

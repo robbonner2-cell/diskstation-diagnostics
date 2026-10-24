@@ -139,13 +139,16 @@ footer{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-con
 .sw.bad{background:color-mix(in srgb,var(--red) 55%,transparent);box-shadow:0 0 8px var(--red)}
 .spindles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
 .cluster{border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:#0b0f16}
-.chead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:7px;flex-wrap:wrap}
+.chead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;min-height:15px;margin-bottom:2px}
+.csub{font-family:var(--mono);font-size:9.5px;color:var(--dim2);min-height:26px;line-height:1.35;margin-bottom:6px}
 .chead b{font-size:10.5px;letter-spacing:.1em}
 .chead span{font-family:var(--mono);font-size:9.5px;color:var(--dim2)}
-.chead .fl{color:var(--red)}
+.cluster.red .chead .st{color:var(--red)}
+.cluster.green .chead .st{color:var(--green)}
+.cluster.amber .chead .st{color:var(--amber)}
 .cluster.red .chead b{color:var(--red)} .cluster.amber .chead b{color:var(--amber)}
 .cluster.green .chead b{color:var(--green)}
-.cells{display:flex;flex-wrap:wrap;gap:3px}
+.cells{display:flex;flex-wrap:wrap;gap:3px;align-content:flex-start}
 .cell{width:12px;height:15px;border-radius:2px;background:linear-gradient(180deg,#37445c,#232c3b);
  border:1px solid #4a5878;display:block}
 .cell.bad{background:color-mix(in srgb,var(--red) 45%,#2b3648);border-color:var(--red);
@@ -187,17 +190,17 @@ footer{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-con
   <div class="caplegend"><span><i class="sw used"></i>used 310 TB</span>
     <span><i class="sw free"></i>free 170 TB</span></div>
   <div class="spindles"><div class="cluster green">
-   <div class="chead"><b>DS1</b>
-     <span>24 drives · 133 used of 187 TB · healthy</span></div>
+   <div class="chead"><b>DS1</b><span class="st">healthy</span></div>
+   <div class="csub">24 drives · 133 used of 187 TB</div>
    <div class="cells"><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i></div></div><div class="cluster red">
-   <div class="chead"><b>DS2</b>
-     <span>23 drives · 22 used of 60 TB · <b class="fl">1 flagged</b></span></div>
+   <div class="chead"><b>DS2</b><span class="st">1 flagged</span></div>
+   <div class="csub">23 drives · 22 used of 60 TB</div>
    <div class="cells"><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell bad"></i></div></div><div class="cluster green">
-   <div class="chead"><b>DS3</b>
-     <span>24 drives · 78 used of 124 TB · healthy</span></div>
+   <div class="chead"><b>DS3</b><span class="st">healthy</span></div>
+   <div class="csub">24 drives · 78 used of 124 TB</div>
    <div class="cells"><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i></div></div><div class="cluster red">
-   <div class="chead"><b>DS4</b>
-     <span>24 drives · 77 used of 110 TB · <b class="fl">5 flagged</b></span></div>
+   <div class="chead"><b>DS4</b><span class="st">5 flagged</span></div>
+   <div class="csub">24 drives · 77 used of 110 TB</div>
    <div class="cells"><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell bad"></i><i class="cell bad"></i><i class="cell bad"></i><i class="cell bad"></i><i class="cell bad"></i></div></div></div>
   <div class="caplegend sp"><span>one cell = one physical drive (95 total)</span>
     <span><i class="sw bad"></i>flagged by DSM (SMART/crashed)</span></div>

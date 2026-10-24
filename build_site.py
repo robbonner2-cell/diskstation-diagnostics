@@ -293,17 +293,37 @@ footer{{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-co
 </body></html>'''
 
 os.makedirs(os.path.dirname(OUT_JSON), exist_ok=True)
-json.dump({"stamp": stamp, **m}, open(OUT_JSON, "w"), indent=1)
-open(OUT_HTML, "w").write(doc)
+data_txt = json.dumps({"stamp": stamp, **m}, indent=1)
 
-# --- generator self-check: the page carries the same stamp as the data file ---
-page = open(OUT_HTML).read()
-assert f'data-stamp="{stamp}"' in page, "stamp missing from page"
-assert json.load(open(OUT_JSON))["stamp"] == stamp
-assert "192.168." not in page and "192.168." not in open(OUT_JSON).read(), "LAN address leaked"
+# --- self-check BEFORE any write: a refused build must not touch the artifacts ---
 import re as _re
+assert f'data-stamp="{stamp}"' in doc, "stamp missing from page"
+assert json.loads(data_txt)["stamp"] == stamp, "stamp mismatch between page and data"
+assert "192.168." not in doc, "LAN address leaked into page"
+assert "192.168." not in data_txt, "LAN address leaked into data"
 for pat in (r'src\s*=\s*["\']https?://', r'href\s*=\s*["\']https?://', r"<script", r"@import"):
-    assert not _re.search(pat, page), f"external/runtime dependency in page: {pat}"
+    assert not _re.search(pat, doc), f"external/runtime dependency in page: {pat}"
+for bad, why in ((r"/home/dreams", "absolute local path in page"), (r"/home/dreams", "absolute local path in data")):
+    assert not _re.search(bad, doc if "page" in why else data_txt), why
+
+
+def _atomic(path, text):
+    tmp = path + ".tmp"
+    with open(tmp, "w") as fh:
+        fh.write(text)
+        fh.flush()
+        os.fsync(fh.fileno())
+    os.replace(tmp, path)
+
+
+_atomic(OUT_JSON, data_txt)
+_atomic(OUT_HTML, doc)
+
+# --- read back what actually landed ---
+page = open(OUT_HTML).read()
+assert page == doc, "index.html on disk differs from the validated document"
+assert json.load(open(OUT_JSON))["stamp"] == stamp, "data file stamp changed on write"
+assert "192.168." not in page and "192.168." not in open(OUT_JSON).read(), "LAN address leaked"
 print(f"wrote {OUT_HTML} ({len(page)}b) stamp={stamp}")
 print(f"wrote {OUT_JSON}")
 print(f"boxes={len(boxes)} findings={len(findings)} external_refs=0 lan_leak=0")

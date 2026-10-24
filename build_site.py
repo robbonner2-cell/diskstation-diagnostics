@@ -123,6 +123,45 @@ frows = "".join(
     f'<tr><td class="mono">{bid}</td><td><span class="sev {s}">{s}</span></td>'
     f'<td class="msg">{html.escape(msg)}</td></tr>' for s, bid, msg in findings)
 
+# --- capacity + spindle visualisation (physical view) ----------------------
+t_used = t_log = 0.0
+clusters = []
+for b in boxes:
+    u = sum(v["tb"] - v["free_tb"] for v in b["vols"].values())
+    lg = sum(v["tb"] for v in b["vols"].values())
+    t_used += u
+    t_log += lg
+    n = int(b["n_disks"])
+    k = len(b["bad_disks"])
+    cells = '<i class="cell"></i>' * (n - k) + '<i class="cell bad"></i>' * k
+    degraded = any(v["status"] != "normal" for v in b["vols"].values())
+    cls = "red" if degraded else ("amber" if k else "green")
+    fl = f" · <b class=\"fl\">{k} flagged</b>" if k else " · healthy"
+    clusters.append(f'''<div class="cluster {cls}">
+   <div class="chead"><b>{b['id'].upper()}</b>
+     <span>{n} drives · {u:.0f} used of {lg:.0f} TB{fl}</span></div>
+   <div class="cells">{cells}</div></div>''')
+
+fill_pct = t_used / t_log * 100
+u_disp = round(t_used)
+f_disp = round(t_log) - u_disp
+cap_html = f'''<section class="cap">
+  <div class="caphead">
+    <div class="capbig"><b>{u_disp}</b><span>TB in use</span></div>
+    <div class="capmeta">of <b>{t_log:.0f} TB</b> usable &nbsp;·&nbsp; <b>{f_disp} TB</b> free
+      &nbsp;·&nbsp; <span class="dim">{T['raw']:.0f} TB raw before mirroring/parity · figures rounded independently</span></div>
+    <div class="cappct"><b>{fill_pct:.0f}%</b><span>of usable capacity used</span></div>
+  </div>
+  <div class="tank"><div class="tankfill" style="width:{fill_pct:.2f}%"></div></div>
+  <div class="tankscale"><span>0</span><span>{t_log * .25:.0f}</span><span>{t_log * .5:.0f}</span>
+    <span>{t_log * .75:.0f}</span><span>{t_log:.0f} TB</span></div>
+  <div class="caplegend"><span><i class="sw used"></i>used {u_disp} TB</span>
+    <span><i class="sw free"></i>free {f_disp} TB</span></div>
+  <div class="spindles">{"".join(clusters)}</div>
+  <div class="caplegend sp"><span>one cell = one physical drive ({T['disks']} total)</span>
+    <span><i class="sw bad"></i>flagged by DSM (SMART/crashed)</span></div>
+</section>'''
+
 doc = f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
@@ -236,10 +275,50 @@ td.msg{{white-space:normal;color:#c9d3e3;line-height:1.45}}
  border-radius:4px;padding:1px 5px;color:#d7e0ee}}
 footer{{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-content:space-between;
  gap:14px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:14px}}
+/* ---- capacity + physical spindle view ---- */
+.cap{{border:1px solid var(--line);border-radius:14px;padding:16px 18px 14px;margin:0 0 30px;
+ background:linear-gradient(180deg,var(--card2),var(--card));position:relative;overflow:hidden}}
+.cap::before{{content:"";position:absolute;inset:0 0 auto 0;height:1px;
+ background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--blue) 55%,transparent),transparent)}}
+.caphead{{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:12px}}
+.capbig{{display:flex;align-items:baseline;gap:7px}}
+.capbig b{{font-size:34px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em;font-weight:650}}
+.capbig span{{font-size:11px;color:var(--dim);letter-spacing:.04em}}
+.capmeta{{font-size:12px;color:var(--dim);flex:1;min-width:210px}}
+.capmeta b{{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}}
+.cappct{{display:flex;align-items:baseline;gap:7px}}
+.cappct b{{font-size:21px;font-variant-numeric:tabular-nums;color:var(--amber)}}
+.cappct span{{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim2)}}
+.tank{{position:relative;height:34px;border-radius:9px;background:#161c27;border:1px solid var(--line2);overflow:hidden}}
+.tankfill{{position:absolute;inset:0 auto 0 0;border-radius:8px 0 0 8px;
+ background:linear-gradient(90deg,#1d5fbf,#4aa8ff 72%,#7cc4ff);box-shadow:0 0 22px -4px #4aa8ff}}
+.tankticks i{{position:absolute;top:0;bottom:0;width:1px;background:rgba(0,0,0,.45)}}
+.tankscale{{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;
+ color:var(--dim2);margin:5px 2px 10px}}
+.caplegend{{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--dim);align-items:center}}
+.caplegend.sp{{margin-top:11px}}
+.sw{{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:-1px}}
+.sw.used{{background:linear-gradient(90deg,#1d5fbf,#4aa8ff)}}
+.sw.free{{background:#161c27;border:1px solid var(--line2)}}
+.sw.bad{{background:color-mix(in srgb,var(--red) 55%,transparent);box-shadow:0 0 8px var(--red)}}
+.spindles{{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}}
+.cluster{{border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:#0b0f16}}
+.chead{{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:7px;flex-wrap:wrap}}
+.chead b{{font-size:10.5px;letter-spacing:.1em}}
+.chead span{{font-family:var(--mono);font-size:9.5px;color:var(--dim2)}}
+.chead .fl{{color:var(--red)}}
+.cluster.red .chead b{{color:var(--red)}} .cluster.amber .chead b{{color:var(--amber)}}
+.cluster.green .chead b{{color:var(--green)}}
+.cells{{display:flex;flex-wrap:wrap;gap:3px}}
+.cell{{width:12px;height:15px;border-radius:2px;background:linear-gradient(180deg,#37445c,#232c3b);
+ border:1px solid #4a5878;display:block}}
+.cell.bad{{background:color-mix(in srgb,var(--red) 45%,#2b3648);border-color:var(--red);
+ box-shadow:0 0 5px -2px var(--red)}}
 @media (max-width:760px){{
  body{{padding:26px 14px 50px}} .grid2{{grid-template-columns:1fr}}
  th,td{{padding-left:12px}} th:last-child,td:last-child{{padding-right:12px}}
  .k{{min-width:100%}} .mis{{padding:10px 12px}}
+ .spindles{{grid-template-columns:repeat(2,1fr)}} .capbig b{{font-size:28px}}
 }}
 </style></head>
 <body data-stamp="{stamp}">
@@ -247,7 +326,7 @@ footer{{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-co
  <div class="eyebrow"><i></i>read-only DSM API · snapshot {read_at}</div>
  <h1>DiskStation fleet <span>— full diagnostics</span></h1>
  <p class="lede">Four Synology boxes, <b>{T['disks']} spindles</b>, <b>{T['raw']:.0f} TB</b> raw.
- Two volumes are degraded and both trace to short arrays, not failing member drives. Two scrubs that
+ Two volumes are degraded and both trace to short arrays rather than a failed array member. Two scrubs that
  were mid-flight on 2026-10-20 have finished. Every number below was re-queried after rendering and
  matched; the checks are listed at the bottom.</p>
  <div class="tot">
@@ -259,6 +338,7 @@ footer{{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-co
   <div><u>degraded volumes</u><b class="hot">2</b></div>
   <div><u>rebuilds running</u><b class="cool">0</b></div>
  </div>
+ {cap_html}
  <p class="stamp">snapshot <code>{stamp}</code> · compared against <code>2026-10-20T05:52:17</code></p>
  {''.join(cards)}
 
@@ -298,6 +378,9 @@ data_txt = json.dumps({"stamp": stamp, **m}, indent=1)
 # --- self-check BEFORE any write: a refused build must not touch the artifacts ---
 assert f'data-stamp="{stamp}"' in doc, "stamp missing from page"
 assert json.loads(data_txt)["stamp"] == stamp, "stamp mismatch between page and data"
+assert cap_html.count('<i class="cell"></i>') + cap_html.count('<i class="cell bad"></i>') == T["disks"], "spindle count != fleet disk count"
+assert cap_html.count('<i class="cell bad"></i>') == sum(len(b["bad_disks"]) for b in boxes), "flagged drive count mismatch"
+assert abs(t_used - T["used"]) < 0.6 and abs(t_log - T["logical"]) < 0.6, "capacity sums disagree with totals"
 assert "192.168." not in doc, "LAN address leaked into page"
 assert "192.168." not in data_txt, "LAN address leaked into data"
 for pat in (r'src\s*=\s*["\']https?://', r'href\s*=\s*["\']https?://', r"<script", r"@import"):

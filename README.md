@@ -25,6 +25,9 @@ Fleet totals: **95 spindles · 617 TB raw · 480 TB logical ·
 
 ## What it says
 
+- **Capacity at a glance**: 617 TB raw / 480 TB usable across 95 drives, of which 310 TB is in use
+  (64%) and 170 TB is free. The page draws this as one used/free bar on a 0–480 TB scale, and under
+  it one cell per physical drive grouped by box, with DSM-flagged drives lit red (6 of 95).
 - **Two volumes degraded**, both traceable to a short array rather than a failing member drive:
   `md2` at 10/12 members on box 2 and 11/12 on box 4, with two-disk and one-disk redundancy left
   respectively. No rebuild is running on any box, so nothing is self-healing.

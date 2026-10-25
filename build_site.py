@@ -172,17 +172,14 @@ def _join_ids(rows):
 
 need = [b for b in boxes if sev(b) != "green"]
 fine = [b for b in boxes if sev(b) == "green"]
+glance_title = "Diskstation Fleet"
 if need:
     n = len(need)
-    glance_title = f"{n} {'box needs' if n == 1 else 'boxes need'} attention"
-    glance_cls = "bad"
     glance_sub = f"{_join_ids(need)} {'has' if n == 1 else 'have'} a problem."
     if fine:
         nf = len(fine)
         glance_sub += f" {_join_ids(fine)} {'is' if nf == 1 else 'are'} fine."
 else:
-    glance_title = "All boxes are fine"
-    glance_cls = "ok"
     glance_sub = "Nothing needs attention."
 
 WORD = {"green": "FINE", "amber": "CHECK", "red": "NEEDS HELP"}
@@ -200,8 +197,8 @@ for b in boxes:
         f'<div class="gdetail">{int(b["n_disks"])} drives. {u:.0f} of {lg:.0f} TB used.{extra}</div>'
         f'</div>')
 glance_html = f'''<section class="glance" aria-label="Status at a glance">
-  <p class="glance-kicker">DiskStation fleet · snapshot {read_at}</p>
-  <h1 class="{glance_cls}">{glance_title}</h1>
+  <p class="glance-kicker">snapshot {read_at}</p>
+  <h1>{glance_title}</h1>
   <p class="glance-sub">{glance_sub}</p>
   <div class="gcards">{"".join(gcards)}</div>
 </section>'''

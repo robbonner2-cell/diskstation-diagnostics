@@ -477,8 +477,8 @@ footer{{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-co
  </div>
  {cap_html}
  <p class="stamp">snapshot <code>{stamp}</code> · compared against <code>2026-10-20T05:52:17</code></p>
- {''.join(cards)}
  {whatbox_html}
+ {''.join(cards)}
 
  <h2>Findings, worst first</h2>
  <div class="findings"><table><thead><tr><th style="width:56px">box</th>

@@ -431,16 +431,16 @@ footer{{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-co
 .cell{{width:16px;height:20px;border-radius:3px;background:linear-gradient(180deg,#4a5870,#2a3444);
  border:1px solid #8b97ab;display:block}}
 .cell.bad{{background:#ff5d5d;border-color:#fff;box-shadow:0 0 8px var(--red)}}
-.wbox{{margin:22px 0 6px}}
-.wbox-kicker{{margin:0 0 6px;font-size:20px;font-weight:700;color:#d7e0ee}}
-.wbox-note{{margin:0 0 14px;font-size:18px;font-weight:650;color:#f4f7fb;max-width:46em;line-height:1.35}}
-.wcards{{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}}
-.wcard{{background:#141a24;border:3px solid #3a465c;border-radius:18px;padding:18px 16px 16px;min-height:250px}}
-.wicon{{width:80px;height:80px;display:block;margin:0 0 12px;color:#7cc4ff;fill:none;stroke:currentColor;stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}}
-.wnum{{font-size:56px;font-weight:800;line-height:.95;letter-spacing:-.03em;color:#fff}}
-.wunit{{font-size:22px;font-weight:750;color:#f4f7fb;margin-top:4px}}
-.wname{{font-size:22px;font-weight:800;letter-spacing:.06em;margin-top:12px;color:#fff}}
-.wdetail{{font-size:18px;font-weight:650;color:#d7e0ee;margin-top:8px;line-height:1.35}}
+.wbox{{margin:28px 0 8px}}
+.wbox-kicker{{margin:0 0 4px;font-size:18px;font-weight:700;color:#d7e0ee}}
+.wbox-note{{margin:0 0 10px;font-size:16px;font-weight:650;color:#f4f7fb;max-width:46em;line-height:1.35}}
+.wcards{{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}}
+.wcard{{background:#141a24;border:2px solid #3a465c;border-radius:14px;padding:12px 12px 12px;min-height:0}}
+.wicon{{width:64px;height:64px;display:block;margin:0 0 8px;color:#7cc4ff;fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}}
+.wnum{{font-size:44px;font-weight:800;line-height:.95;letter-spacing:-.03em;color:#fff}}
+.wunit{{font-size:18px;font-weight:750;color:#f4f7fb;margin-top:2px}}
+.wname{{font-size:18px;font-weight:800;letter-spacing:.06em;margin-top:8px;color:#fff}}
+.wdetail{{font-size:16px;font-weight:650;color:#d7e0ee;margin-top:6px;line-height:1.35}}
 @media (max-width:900px){{
  .gcards,.wcards{{grid-template-columns:1fr 1fr}}
  .glance h1{{font-size:42px}}
@@ -462,7 +462,6 @@ footer{{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-co
 <body data-stamp="{stamp}">
 <div class="wrap">
  {glance_html}
- {whatbox_html}
  <p class="lede">Four Synology boxes, <b>{T['disks']} spindles</b>, <b>{T['raw']:.0f} TB</b> raw.
  Two volumes are degraded and both trace to short arrays rather than a failed array member. Two scrubs that
  were mid-flight on 2026-10-20 have finished. Every number below was re-queried after rendering and
@@ -479,6 +478,7 @@ footer{{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-co
  {cap_html}
  <p class="stamp">snapshot <code>{stamp}</code> · compared against <code>2026-10-20T05:52:17</code></p>
  {''.join(cards)}
+ {whatbox_html}
 
  <h2>Findings, worst first</h2>
  <div class="findings"><table><thead><tr><th style="width:56px">box</th>

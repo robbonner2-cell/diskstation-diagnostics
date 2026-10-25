@@ -239,7 +239,7 @@ def _whatbox_html():
         "net": '<svg class="wicon" viewBox="0 0 64 64" aria-hidden="true"><path d="M22 12v30M22 12l-9 9M22 12l9 9"/><path d="M42 52V22M42 52l-9-9M42 52l9-9"/></svg>',
     }
     cards = [
-        ("cpu", f"{cpu:.1f}", "cores", "CPU", f"last hour · {share:.1f}% of the box · {cap}"),
+        ("cpu", f"{share:.1f}%", f"of {w['box_cores']} cores", "CPU", f"{cpu:.1f} cores average · {cap}"),
         ("ram", f"{mem_pct:.0f}%", f"of {cap_gb:.0f} GB", "RAM", f"{mem_gb:.0f} GB average"),
         ("disk", f"{disk_pct:.0f}%", "full", "DISK", f"{used_tb:.0f} of {total_tb:.0f} TB · {rd:.1f} MB/s read"),
         ("net", f"{tx:.0f}", "MB/s out", "NETWORK", f"whole server, not our slot · {rx:.0f} MB/s in"),

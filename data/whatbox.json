@@ -1,0 +1,22 @@
+{
+  "host": "duku.whatbox.ca",
+  "measured": "2026-10-25T13:34:01Z",
+  "source": "host_metrics.db samples, last 3600s, plus cgroup limits read the same minute",
+  "n": 60,
+  "window_start_local": "2026-10-25 07:35:01",
+  "window_end_local": "2026-10-25 08:34:01",
+  "window_tz": "CDT",
+  "box_cores": 64,
+  "cpu_max": "max",
+  "cpuset": "0-63",
+  "slot_cpu_cores_avg": 1.6246106353399092,
+  "memory_max_bytes": 68719476736,
+  "slot_mem_bytes_avg": 34722922496.0,
+  "home_used_kb_avg": 10819065987.066668,
+  "home_avail_kb_avg": 10664169340.933332,
+  "slot_io_read_bps_avg": 3617041.8143311418,
+  "slot_io_write_bps_avg": 1491760.8760754531,
+  "host_net_rx_bps_avg": 30258800.223476816,
+  "host_net_tx_bps_avg": 132630236.30725974,
+  "network_scope": "host-wide; this slot has no network counter and the link speed is unreadable"
+}

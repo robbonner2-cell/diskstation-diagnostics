@@ -203,6 +203,68 @@ glance_html = f'''<section class="glance" aria-label="Status at a glance">
   <div class="gcards">{"".join(gcards)}</div>
 </section>'''
 
+
+def _clock(ts):
+    h, m, _ = ts.split(" ")[1].split(":")
+    h = int(h)
+    ap = "AM" if h < 12 else "PM"
+    return f"{h % 12 or 12}:{m} {ap}"
+
+def _whatbox_html():
+    path = os.path.join(HERE, "data", "whatbox.json")
+    if not os.path.exists(path):
+        return ""
+    w = json.load(open(path))
+    GiB = 1024 ** 3
+    cpu = w["slot_cpu_cores_avg"]
+    share = 100 * cpu / w["box_cores"]
+    mem_pct = 100 * w["slot_mem_bytes_avg"] / w["memory_max_bytes"]
+    mem_gb = w["slot_mem_bytes_avg"] / GiB
+    cap_gb = w["memory_max_bytes"] / GiB
+    used_b = w["home_used_kb_avg"] * 1024
+    avail_b = w["home_avail_kb_avg"] * 1024
+    disk_pct = 100 * used_b / (used_b + avail_b)
+    used_tb = used_b / 1e12
+    total_tb = (used_b + avail_b) / 1e12
+    rx = w["host_net_rx_bps_avg"] / 1e6
+    tx = w["host_net_tx_bps_avg"] / 1e6
+    rd = w["slot_io_read_bps_avg"] / 1e6
+    wr = w["slot_io_write_bps_avg"] / 1e6
+    window = f"{_clock(w['window_start_local']).replace(' AM','').replace(' PM','')}–{_clock(w['window_end_local'])}"
+    cap = "no cap" if w.get("cpu_max") == "max" else f"cap {w['cpu_max']}"
+    icons = {
+        "cpu": '<svg class="wicon" viewBox="0 0 64 64" aria-hidden="true"><rect x="16" y="16" width="32" height="32" rx="4"/><rect x="24" y="24" width="16" height="16"/><path d="M24 8v8M32 8v8M40 8v8M24 48v8M32 48v8M40 48v8M8 24h8M8 32h8M8 40h8M48 24h8M48 32h8M48 40h8"/></svg>',
+        "ram": '<svg class="wicon" viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="20" width="48" height="26" rx="3"/><path d="M16 20v-7M24 20v-7M32 20v-7M40 20v-7M48 20v-7M16 30h10M16 38h22"/></svg>',
+        "disk": '<svg class="wicon" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="18" rx="22" ry="8"/><path d="M10 18v26c0 4.4 9.8 8 22 8s22-3.6 22-8V18"/><path d="M10 31c0 4.4 9.8 8 22 8s22-3.6 22-8"/></svg>',
+        "net": '<svg class="wicon" viewBox="0 0 64 64" aria-hidden="true"><path d="M22 12v30M22 12l-9 9M22 12l9 9"/><path d="M42 52V22M42 52l-9-9M42 52l9-9"/></svg>',
+    }
+    cards = [
+        ("cpu", f"{cpu:.1f}", "cores", "CPU", f"last hour · {share:.1f}% of the box · {cap}"),
+        ("ram", f"{mem_pct:.0f}%", f"of {cap_gb:.0f} GB", "RAM", f"{mem_gb:.0f} GB average"),
+        ("disk", f"{disk_pct:.0f}%", "full", "DISK", f"{used_tb:.0f} of {total_tb:.0f} TB · {rd:.1f} MB/s read"),
+        ("net", f"{tx:.0f}", "MB/s out", "NETWORK", f"whole server, not our slot · {rx:.0f} MB/s in"),
+    ]
+    body = []
+    for key, num, unit, name, detail in cards:
+        body.append(
+            f'<div class="wcard {key}">'
+            f'{icons[key]}'
+            f'<div class="wnum">{num}</div>'
+            f'<div class="wunit">{html.escape(unit)}</div>'
+            f'<div class="wname">{name}</div>'
+            f'<div class="wdetail">{html.escape(detail)}</div>'
+            f'</div>'
+        )
+    return (
+        '<section class="wbox" aria-label="Whatbox last hour">'
+        f'<p class="wbox-kicker">Whatbox · last hour average · {window}</p>'
+        '<p class="wbox-note">CPU, memory and disk are our slot. Network is the whole machine — this slot is not measured separately, and there is no link speed, so that one is a rate, not a percent.</p>'
+        f'<div class="wcards">{"".join(body)}</div>'
+        '</section>'
+    )
+
+whatbox_html = _whatbox_html()
+
 doc = f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
@@ -369,8 +431,18 @@ footer{{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-co
 .cell{{width:16px;height:20px;border-radius:3px;background:linear-gradient(180deg,#4a5870,#2a3444);
  border:1px solid #8b97ab;display:block}}
 .cell.bad{{background:#ff5d5d;border-color:#fff;box-shadow:0 0 8px var(--red)}}
+.wbox{{margin:22px 0 6px}}
+.wbox-kicker{{margin:0 0 6px;font-size:20px;font-weight:700;color:#d7e0ee}}
+.wbox-note{{margin:0 0 14px;font-size:18px;font-weight:650;color:#f4f7fb;max-width:46em;line-height:1.35}}
+.wcards{{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}}
+.wcard{{background:#141a24;border:3px solid #3a465c;border-radius:18px;padding:18px 16px 16px;min-height:250px}}
+.wicon{{width:80px;height:80px;display:block;margin:0 0 12px;color:#7cc4ff;fill:none;stroke:currentColor;stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}}
+.wnum{{font-size:56px;font-weight:800;line-height:.95;letter-spacing:-.03em;color:#fff}}
+.wunit{{font-size:22px;font-weight:750;color:#f4f7fb;margin-top:4px}}
+.wname{{font-size:22px;font-weight:800;letter-spacing:.06em;margin-top:12px;color:#fff}}
+.wdetail{{font-size:18px;font-weight:650;color:#d7e0ee;margin-top:8px;line-height:1.35}}
 @media (max-width:900px){{
- .gcards{{grid-template-columns:1fr 1fr}}
+ .gcards,.wcards{{grid-template-columns:1fr 1fr}}
  .glance h1{{font-size:42px}}
  .gname{{font-size:36px}} .gstat{{font-size:24px}}
  .capbig b{{font-size:56px}}
@@ -383,13 +455,14 @@ footer{{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-co
  .glance-sub{{font-size:22px}}
 }}
 @media (max-width:520px){{
- .gcards{{grid-template-columns:1fr}}
+ .gcards,.wcards{{grid-template-columns:1fr}}
  .gcard{{min-height:0}}
 }}
 </style></head>
 <body data-stamp="{stamp}">
 <div class="wrap">
  {glance_html}
+ {whatbox_html}
  <p class="lede">Four Synology boxes, <b>{T['disks']} spindles</b>, <b>{T['raw']:.0f} TB</b> raw.
  Two volumes are degraded and both trace to short arrays rather than a failed array member. Two scrubs that
  were mid-flight on 2026-10-20 have finished. Every number below was re-queried after rendering and

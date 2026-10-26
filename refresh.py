@@ -114,8 +114,15 @@ def prev_snapshot():
     return os.path.join(DS_SNAPS, cands[-1]) if cands else None
 
 
-def findings_for(b):
+def slot_map(st):
+    """DSM gives slot_id per drive; the collector's model drops it, so keep it here."""
+    return {d.get("id"): d.get("slot_id") for d in st.get("disks") or []
+            if d.get("slot_id") is not None}
+
+
+def findings_for(b, slots=None):
     """Every finding is derived from this pull. No carry-over from an old run."""
+    slots = slots or {}
     out = []
     for vid, v in b["vols"].items():
         if v.get("status") != "normal":
@@ -133,10 +140,12 @@ def findings_for(b):
         if a.get("have") != a.get("need"):
             out.append({"sev": "critical",
                         "msg": f'{a.get("raid")} has {a.get("have")}/{a.get("need")} members '
-                               f'(pool {a.get("pool") or a.get("vol")})'})
+                               f'(in {a.get("vol")})'})
     for d in b["bad_disks"]:
         smart, status = d.get("smart"), d.get("status")
-        base = f'{d.get("id")} {status}, SMART {smart}, {d.get("model")}'
+        slot = slots.get(d.get("id"))
+        base = (f'{d.get("id")} (slot {slot})' if slot is not None else d.get("id")) + \
+               f' {status}, SMART {smart}, {d.get("model")}'
         if smart == "failing":
             out.append({"sev": "high", "msg": base})
         elif status == "system_crashed":
@@ -162,6 +171,10 @@ def self_checks(boxes, totals):
     add("four boxes answered", len(boxes) == 4, len(boxes))
     add("every box reports disks", all(b["n_disks"] > 0 for b in boxes),
         [b["n_disks"] for b in boxes])
+    add("every box reports volumes", all(len(b["vols"]) > 0 for b in boxes),
+        [len(b["vols"]) for b in boxes])
+    add("capacity sums are non-zero", totals["logical"] > 0 and totals["used"] > 0,
+        f'{totals["logical"]}/{totals["used"]}')
     add("spindle total stable (95)", totals["disks"] == 95, totals["disks"])
     add("raw capacity plausible", totals["raw"] > 500, f'{totals["raw"]} TB')
     add("logical <= raw", totals["logical"] <= totals["raw"] + 1,
@@ -193,7 +206,7 @@ def build_model():
         live[bid] = data
     boxes, prev_taken = mod.build_model(live, prev_snapshot())
     for b in boxes:
-        b["findings"] = findings_for(b)
+        b["findings"] = findings_for(b, slot_map(live[b["id"]]["st"]))
     totals = {
         "disks": sum(int(b["n_disks"]) for b in boxes),
         "raw": round(sum(float(b["raw_tb"]) for b in boxes), 1),

@@ -1,6 +1,6 @@
 {
- "stamp": "2026-10-24T01:44:29.840404",
- "built": "2026-10-24T01:44:29.840404",
+ "stamp": "2026-10-26T10:04:30.381753",
+ "built": "2026-10-26T10:04:30.381753",
  "totals": {
   "disks": 95,
   "raw": 617.0,
@@ -13,11 +13,11 @@
    "name": "Diskstation1",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_h": 157.20888888888888,
-   "up_raw": "157:12:32",
+   "up_raw": "213:32:24",
+   "up_h": 213.54,
    "temp": 37,
-   "prev_temp": 34,
-   "prev_uptime": "65:20:14",
+   "prev_temp": 37,
+   "prev_uptime": "157:4:0",
    "n_disks": 24,
    "raw_tb": 232.0,
    "vols": {
@@ -45,7 +45,6 @@
    "arrays": [
     {
      "raid": "/dev/md4",
-     "pool": "reuse_1",
      "vol": "volume_1",
      "have": 8,
      "need": 8,
@@ -53,7 +52,6 @@
     },
     {
      "raid": "/dev/md2",
-     "pool": "reuse_1",
      "vol": "volume_1",
      "have": 12,
      "need": 12,
@@ -61,7 +59,6 @@
     },
     {
      "raid": "/dev/md3",
-     "pool": "reuse_2",
      "vol": "volume_2",
      "have": 12,
      "need": 12,
@@ -75,12 +72,7 @@
      "state": "backupable"
     }
    ],
-   "findings": [
-    {
-     "sev": "medium",
-     "msg": "volume_2 data scrub at 16.33"
-    }
-   ],
+   "findings": [],
    "prev_vols": {
     "volume_1": {
      "id": "volume_1",
@@ -96,13 +88,13 @@
     },
     "volume_2": {
      "id": "volume_2",
-     "status": "background",
+     "status": "normal",
      "pct": 58,
      "tb": 79.6,
      "free_tb": 33.3,
-     "scrub": "kernel_running",
-     "progress_percent": "16.33",
-     "progress_step": "data_scrubbing",
+     "scrub": "no_action",
+     "progress_percent": "-1",
+     "progress_step": "none",
      "device_type": "shr_with_2_disk_protect",
      "disk_failure_number": 0
     }
@@ -113,11 +105,11 @@
    "name": "Diskstation2",
    "model": "DS2411+",
    "dsm": "DSM 6.2.4-25556 Update 7",
-   "up_h": 157.2175,
-   "up_raw": "157:13:3",
+   "up_raw": "213:32:53",
+   "up_h": 213.54805555555555,
    "temp": 39,
-   "prev_temp": 37,
-   "prev_uptime": "65:20:44",
+   "prev_temp": 39,
+   "prev_uptime": "157:4:19",
    "n_disks": 23,
    "raw_tb": 83.0,
    "vols": {
@@ -145,7 +137,6 @@
    "arrays": [
     {
      "raid": "/dev/md3",
-     "pool": "reuse_2",
      "vol": "volume_2",
      "have": 12,
      "need": 12,
@@ -153,7 +144,6 @@
     },
     {
      "raid": "/dev/md2",
-     "pool": "reuse_1",
      "vol": "volume_1",
      "have": 10,
      "need": 12,
@@ -178,7 +168,7 @@
    "findings": [
     {
      "sev": "low",
-     "msg": "volume_2 scrub flagged kernel_running but progress.step=none, percent=-1 (no progress exposed)"
+     "msg": "volume_2 scrub running, progress not exposed"
     },
     {
      "sev": "critical",
@@ -190,15 +180,15 @@
     },
     {
      "sev": "critical",
-     "msg": "/dev/md2 has 10/12 members (pool reuse_1)"
+     "msg": "/dev/md2 has 10/12 members (pool volume_1)"
     },
     {
      "sev": "high",
-     "msg": "sdpa (slot 10) not_use, SMART failing, WD30EFRX-68EUZN0"
+     "msg": "sdpa not_use, SMART failing, WD30EFRX-68EUZN0"
     },
     {
-     "sev": "high",
-     "msg": "sdpa DSM smart_status=failing \u2014 confirm on-box with smartctl before condemning"
+     "sev": "medium",
+     "msg": "backup \"Synology NAS 1\" reports error_detect"
     }
    ],
    "prev_vols": {
@@ -233,11 +223,11 @@
    "name": "Diskstation3",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_h": 205.29416666666665,
-   "up_raw": "205:17:39",
+   "up_raw": "261:37:35",
+   "up_h": 261.62638888888887,
    "temp": 42,
-   "prev_temp": 38,
-   "prev_uptime": "113:25:4",
+   "prev_temp": 41,
+   "prev_uptime": "205:8:44",
    "n_disks": 24,
    "raw_tb": 157.0,
    "vols": {
@@ -265,7 +255,6 @@
    "arrays": [
     {
      "raid": "/dev/md5",
-     "pool": "reuse_2",
      "vol": "volume_2",
      "have": 7,
      "need": 7,
@@ -273,7 +262,6 @@
     },
     {
      "raid": "/dev/md3",
-     "pool": "reuse_2",
      "vol": "volume_2",
      "have": 12,
      "need": 12,
@@ -281,7 +269,6 @@
     },
     {
      "raid": "/dev/md4",
-     "pool": "reuse_1",
      "vol": "volume_1",
      "have": 10,
      "need": 10,
@@ -289,7 +276,6 @@
     },
     {
      "raid": "/dev/md2",
-     "pool": "reuse_1",
      "vol": "volume_1",
      "have": 12,
      "need": 12,
@@ -302,6 +288,10 @@
     {
      "sev": "low",
      "msg": "volume_2 never scrubbed"
+    },
+    {
+     "sev": "low",
+     "msg": "no backup task defined"
     }
    ],
    "prev_vols": {
@@ -336,11 +326,11 @@
    "name": "Diskstation4",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_h": 157.2213888888889,
-   "up_raw": "157:13:17",
-   "temp": 44,
-   "prev_temp": 42,
-   "prev_uptime": "65:20:32",
+   "up_raw": "213:33:17",
+   "up_h": 213.5547222222222,
+   "temp": 47,
+   "prev_temp": 44,
+   "prev_uptime": "157:4:11",
    "n_disks": 24,
    "raw_tb": 145.0,
    "vols": {
@@ -368,7 +358,6 @@
    "arrays": [
     {
      "raid": "/dev/md6",
-     "pool": "reuse_1",
      "vol": "volume_1",
      "have": 4,
      "need": 4,
@@ -376,7 +365,6 @@
     },
     {
      "raid": "/dev/md2",
-     "pool": "reuse_1",
      "vol": "volume_1",
      "have": 11,
      "need": 12,
@@ -384,7 +372,6 @@
     },
     {
      "raid": "/dev/md4",
-     "pool": "reuse_1",
      "vol": "volume_1",
      "have": 6,
      "need": 6,
@@ -392,7 +379,6 @@
     },
     {
      "raid": "/dev/md5",
-     "pool": "reuse_2",
      "vol": "volume_2",
      "have": 9,
      "need": 9,
@@ -400,7 +386,6 @@
     },
     {
      "raid": "/dev/md3",
-     "pool": "reuse_2",
      "vol": "volume_2",
      "have": 12,
      "need": 12,
@@ -455,32 +440,32 @@
      "msg": "volume_1 scrubbingStatus=abnormal"
     },
     {
-     "sev": "medium",
-     "msg": "volume_2 data scrub at 54.91"
-    },
-    {
      "sev": "critical",
-     "msg": "/dev/md2 has 11/12 members (pool reuse_1)"
+     "msg": "/dev/md2 has 11/12 members (pool volume_1)"
     },
     {
      "sev": "medium",
-     "msg": "sda (slot 1) not_use, SMART normal, ST3000VX000-1CU166"
+     "msg": "sda not_use, SMART normal, ST3000VX000-1CU166"
     },
     {
      "sev": "low",
-     "msg": "sdf flagged system_crashed"
+     "msg": "sdf system_crashed, SMART normal, ST3000VX000-1CU166"
     },
     {
      "sev": "low",
-     "msg": "sdg flagged system_crashed"
+     "msg": "sdg system_crashed, SMART normal, ST3000VX000-1CU166"
     },
     {
      "sev": "low",
-     "msg": "sdh flagged system_crashed"
+     "msg": "sdh system_crashed, SMART normal, ST3000VX000-1CU166"
     },
     {
      "sev": "low",
-     "msg": "sdj flagged system_crashed"
+     "msg": "sdj system_crashed, SMART normal, ST3000VX000-1CU166"
+    },
+    {
+     "sev": "low",
+     "msg": "no backup task defined"
     }
    ],
    "prev_vols": {
@@ -498,17 +483,22 @@
     },
     "volume_2": {
      "id": "volume_2",
-     "status": "background",
+     "status": "normal",
      "pct": 64,
      "tb": 64.7,
      "free_tb": 23.6,
-     "scrub": "kernel_running",
-     "progress_percent": "54.91",
-     "progress_step": "data_scrubbing",
+     "scrub": "no_action",
+     "progress_percent": "-1",
+     "progress_step": "none",
      "device_type": "shr_with_2_disk_protect",
      "disk_failure_number": 0
     }
    }
   }
- ]
+ ],
+ "prev_taken": "2026-10-24T01:35:30-0500",
+ "checks": {
+  "passed": 11,
+  "total": 11
+ }
 }

@@ -43,11 +43,21 @@ BOXES = [("ds1", "Diskstation1", "192.168.0.134", 15001),
 
 
 def log(msg):
+    """Append once. Cron redirects stdout into this same file, so a plain
+    print would write every line twice."""
     line = f"{datetime.datetime.now().isoformat(timespec='seconds')} {msg}"
-    print(line, flush=True)
     os.makedirs(os.path.dirname(LOG), exist_ok=True)
+    same = False
+    try:
+        out = os.fstat(sys.stdout.fileno())
+        lg = os.stat(LOG)
+        same = (out.st_dev, out.st_ino) == (lg.st_dev, lg.st_ino)
+    except (OSError, ValueError, AttributeError):
+        pass
     with open(LOG, "a") as fh:
         fh.write(line + "\n")
+    if not same:
+        print(line, flush=True)
 
 
 def tcp_open(host, port, t=2.0):

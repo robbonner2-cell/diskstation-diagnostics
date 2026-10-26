@@ -9,9 +9,20 @@ static page. No JavaScript, no external fonts, no CDN — the page ships the dat
 
 ## Snapshot
 
-Data read **2026-10-24 01:44:29** from the DSM API (`SYNO.Storage.CGI.Storage`,
-`SYNO.Core.System`, `SYNO.Backup.Task`) and compared against an earlier audit from **2026-10-20**.
-Nothing on the page is generated at request time, so it will not drift from its own stamp.
+Data read live from the DSM API (`SYNO.Storage.CGI.Storage`, `SYNO.Core.System`,
+`SYNO.Backup.Task`) on every refresh, and compared against the previous pull. Nothing on the page is
+generated at request time, so it cannot drift from its own stamp — the stamp is the pull that drew it.
+
+## Refresh
+
+`refresh.py` runs on the laptop every 30 minutes (user cron, `*/30`). One run pulls all four boxes,
+pulls the Whatbox slot figures from the VPS, rebuilds `index.html`, and pushes to GitHub Pages.
+Findings, totals, the degraded count and the self-check count are all derived from that one pull;
+a pull that fails any self-check is never published.
+
+It needs two things to be up: the laptop, and dad's desktop (the SSH tunnel into the 192.168.0.x
+LAN). If either is down the run fails and the published page keeps its last good snapshot. Log:
+`~/.hermes/logs/ds-refresh.log`.
 
 | box | model | disks | raw | volumes | sys temp |
 |---|---|---|---|---|---|
@@ -44,12 +55,12 @@ Fleet totals: **95 spindles · 617 TB raw · 480 TB logical ·
 
 ## Verification
 
-- Every headline number on the page is re-queried from the same pull that produced it: **14/14**
-  generator self-checks.
-- An independent acceptance gate re-reads all four boxes live and asserts the page's numbers:
-  **29/29** checks pass.
-- Per-box uptime deltas match elapsed wall time to within 0.1 h, which is what rules out a reboot
-  between the two audits. DSM `up_time` is `H:MM:SS`, not days.
+- Every headline number on the page is re-derived from the same pull that produced it: **11/11**
+  self-checks, counted on the page itself.
+- The generator re-asserts its own invariants before writing (drive counts sum, spindle grid
+  matches the disk count, capacity sums agree, no LAN address in the output) and refuses to write
+  on a mismatch.
+- Uptime is DSM `up_time` (`H:MM:SS`), not days.
 
 ### Not claimed
 

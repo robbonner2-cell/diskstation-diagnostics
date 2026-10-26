@@ -1,6 +1,6 @@
 {
- "stamp": "2026-10-26T10:15:07.179142",
- "built": "2026-10-26T10:15:07.179142",
+ "stamp": "2026-10-26T10:28:32.449268",
+ "built": "2026-10-26T10:28:32.449268",
  "totals": {
   "disks": 95,
   "raw": 617.0,
@@ -13,8 +13,8 @@
    "name": "Diskstation1",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "213:42:55",
-   "up_h": 213.71527777777777,
+   "up_raw": "213:56:20",
+   "up_h": 213.9388888888889,
    "temp": 37,
    "prev_temp": 37,
    "prev_uptime": "157:4:0",
@@ -105,8 +105,8 @@
    "name": "Diskstation2",
    "model": "DS2411+",
    "dsm": "DSM 6.2.4-25556 Update 7",
-   "up_raw": "213:43:29",
-   "up_h": 213.72472222222223,
+   "up_raw": "213:56:49",
+   "up_h": 213.94694444444445,
    "temp": 40,
    "prev_temp": 39,
    "prev_uptime": "157:4:19",
@@ -180,11 +180,11 @@
     },
     {
      "sev": "critical",
-     "msg": "/dev/md2 has 10/12 members (pool volume_1)"
+     "msg": "/dev/md2 has 10/12 members (in volume_1)"
     },
     {
      "sev": "high",
-     "msg": "sdpa not_use, SMART failing, WD30EFRX-68EUZN0"
+     "msg": "sdpa (slot 10) not_use, SMART failing, WD30EFRX-68EUZN0"
     },
     {
      "sev": "medium",
@@ -223,8 +223,8 @@
    "name": "Diskstation3",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "261:48:12",
-   "up_h": 261.80333333333334,
+   "up_raw": "262:1:32",
+   "up_h": 262.02555555555557,
    "temp": 42,
    "prev_temp": 41,
    "prev_uptime": "205:8:44",
@@ -326,8 +326,8 @@
    "name": "Diskstation4",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "213:43:54",
-   "up_h": 213.73166666666665,
+   "up_raw": "213:57:20",
+   "up_h": 213.95555555555555,
    "temp": 45,
    "prev_temp": 44,
    "prev_uptime": "157:4:11",
@@ -441,27 +441,27 @@
     },
     {
      "sev": "critical",
-     "msg": "/dev/md2 has 11/12 members (pool volume_1)"
+     "msg": "/dev/md2 has 11/12 members (in volume_1)"
     },
     {
      "sev": "medium",
-     "msg": "sda not_use, SMART normal, ST3000VX000-1CU166"
+     "msg": "sda (slot 1) not_use, SMART normal, ST3000VX000-1CU166"
     },
     {
      "sev": "low",
-     "msg": "sdf system_crashed, SMART normal, ST3000VX000-1CU166"
+     "msg": "sdf (slot 6) system_crashed, SMART normal, ST3000VX000-1CU166"
     },
     {
      "sev": "low",
-     "msg": "sdg system_crashed, SMART normal, ST3000VX000-1CU166"
+     "msg": "sdg (slot 7) system_crashed, SMART normal, ST3000VX000-1CU166"
     },
     {
      "sev": "low",
-     "msg": "sdh system_crashed, SMART normal, ST3000VX000-1CU166"
+     "msg": "sdh (slot 8) system_crashed, SMART normal, ST3000VX000-1CU166"
     },
     {
      "sev": "low",
-     "msg": "sdj system_crashed, SMART normal, ST3000VX000-1CU166"
+     "msg": "sdj (slot 10) system_crashed, SMART normal, ST3000VX000-1CU166"
     },
     {
      "sev": "low",
@@ -498,7 +498,7 @@
  ],
  "prev_taken": "2026-10-24T01:35:30-0500",
  "checks": {
-  "passed": 11,
-  "total": 11
+  "passed": 13,
+  "total": 13
  }
 }

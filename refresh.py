@@ -58,6 +58,13 @@ def tcp_open(host, port, t=2.0):
         return False
 
 
+def kill_tunnels():
+    """Only our own forwards: ssh -N ... -L 127.0.0.1:1500x."""
+    subprocess.run(["pkill", "-f", r"ssh -N .*-L 127\.0\.0\.1:15001"],
+                   check=False)
+    time.sleep(1)
+
+
 def ensure_tunnels():
     """Return the ip to hand the collector per box, starting tunnels if needed."""
     if tcp_open(BOXES[0][2], 5001):
@@ -270,7 +277,12 @@ def main():
         log("FATAL not a git checkout")
         return 1
     try:
-        model = build_model()
+        try:
+            model = build_model()
+        except Exception as e:
+            log(f"first attempt failed ({e}); clearing tunnels and retrying")
+            kill_tunnels()
+            model = build_model()
         json.dump(model, open("/tmp/ds_refresh_model.json", "w"), indent=1)
         w = refresh_whatbox()
         gen = subprocess.run([sys.executable, os.path.join(HERE, "build_site.py"),

@@ -25,6 +25,13 @@ stamp = m["built"]
 read_at = datetime.datetime.fromisoformat(stamp).strftime("%Y-%m-%d %H:%M %Z").strip()
 T = m["totals"]
 boxes = m["boxes"]
+prev_taken = m.get("prev_taken")
+prev_label = (datetime.datetime.fromisoformat(prev_taken).strftime("%m-%d")
+              if prev_taken else "previous")
+ck = m.get("checks") or {}
+n_deg = sum(1 for b in boxes for v in b["vols"].values() if v["status"] != "normal")
+n_vol = sum(len(b["vols"]) for b in boxes)
+n_short = sum(1 for b in boxes for a in b["arrays"] if a["have"] != a["need"])
 
 C = {"green": "#3ddc84", "amber": "#f5a524", "red": "#ff5d5d"}
 
@@ -109,7 +116,7 @@ for b in boxes:
  </div>
  <div class="scroll"><table><thead><tr>
   <th>vol</th><th class="bar">capacity</th><th>used</th><th>size</th><th>free</th>
-  <th>status</th><th>scrub</th><th>last scrub</th><th>vs 10-20</th>
+  <th>status</th><th>scrub</th><th>last scrub</th><th>vs {prev_label}</th>
  </tr></thead><tbody>{''.join(rows)}</tbody></table></div>
  <div class="mis"><span class="k">array integrity</span>{arrs}</div>
  {drives}
@@ -264,6 +271,16 @@ def _whatbox_html():
     )
 
 whatbox_html = _whatbox_html()
+
+if n_deg:
+    short = (" and both trace to short arrays rather than a failed array member"
+             if n_short == 2 else "")
+    deg_line = (f"<b>{n_deg}</b> of {n_vol} volumes are degraded{short}."
+                if n_short else f"<b>{n_deg}</b> of {n_vol} volumes are degraded.")
+else:
+    deg_line = "No volume is degraded."
+ck_pass = ck.get("passed", 0)
+ck_total = ck.get("total", 0)
 
 doc = f'''<!doctype html>
 <html lang="en"><head>
@@ -463,20 +480,19 @@ footer{{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-co
 <div class="wrap">
  {glance_html}
  <p class="lede">Four Synology boxes, <b>{T['disks']} spindles</b>, <b>{T['raw']:.0f} TB</b> raw.
- Two volumes are degraded and both trace to short arrays rather than a failed array member. Two scrubs that
- were mid-flight on 2026-10-20 have finished. Every number below was re-queried after rendering and
- matched; the checks are listed at the bottom.</p>
+ {deg_line} Every number below came from the pull that built this page; the checks are listed at the
+ bottom. The page rebuilds itself every 30 minutes.</p>
  <div class="tot">
   <div><u>boxes online</u><b class="cool">4 / 4</b></div>
   <div><u>spindles</u><b>{T['disks']}</b></div>
   <div><u>raw capacity</u><b>{T['raw']:.0f} TB</b></div>
   <div><u>logical</u><b>{T['logical']:.0f} TB</b></div>
   <div><u>used</u><b>{T['used']:.0f} TB</b></div>
-  <div class="hotcell"><u>degraded volumes</u><b class="hot">2</b></div>
-  <div><u>rebuilds running</u><b class="cool">0</b></div>
+  <div class="hotcell"><u>degraded volumes</u><b class="hot">{n_deg}</b></div>
+  <div><u>last refresh {read_at[:10]}</u><b class="cool">{read_at[11:]}</b></div>
  </div>
  {cap_html}
- <p class="stamp">snapshot <code>{stamp}</code> · compared against <code>2026-10-20T05:52:17</code></p>
+ <p class="stamp">snapshot <code>{stamp}</code> · compared against <code>{prev_taken or "no earlier pull"}</code></p>
  {whatbox_html}
  {''.join(cards)}
 
@@ -490,15 +506,14 @@ footer{{margin-top:34px;color:var(--dim2);font-size:11px;display:flex;justify-co
    <li>Data read once, live, from each box's <code>SYNO.Storage.CGI.Storage</code>,
     <code>SYNO.Core.System</code> and <code>SYNO.Backup.Task</code> endpoints with a session login; no
     writes, no package changes.</li>
-   <li>Each headline number on this page re-queried from the same pull: 14/14 self-checks passed.</li>
-   <li>Independent acceptance gate against a fresh pull: 29/29 checks passed.</li>
-   <li>Uptime is DSM <code>up_time</code> (H:MM:SS). Per-box uptime delta matches elapsed wall time to
-    within 0.1 h, so no box rebooted between audits.</li>
+   <li>Each headline number on this page re-derived from the same pull: {ck_pass}/{ck_total}
+    self-checks passed. A pull that fails any of them is never published.</li>
+   <li>Uptime is DSM <code>up_time</code> (H:MM:SS), not days.</li>
   </ul></div>
   <div class="note"><h3>Not verified</h3><ul>
    <li>Drive-level SMART verdicts are DSM's <code>smart_status</code> field only — no on-box
     <code>smartctl</code> was run, so the failing disk is a strong lead, not a confirmed verdict.</li>
-   <li>Why one backup task reports <code>error_detect</code>: the API exposes state, not the last error.</li>
+   <li>Backup state is DSM's own <code>state</code> field; the API exposes the state, not the last error.</li>
    <li>Backup coverage is scoped to Hyper Backup tasks; Snapshot Replication, Cloud Sync and rsync were
     not queried.</li>
    <li>LAN addresses, credentials and hostnames are withheld from this page.</li>

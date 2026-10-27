@@ -18,7 +18,7 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
 #capacity .capacity{padding:42px}#capacity .capacity-main strong{font-size:clamp(64px,7vw,104px)}#capacity .capacity-meta strong{font-size:32px}#capacity .capacity-track{height:64px;margin:28px 0 20px}#capacity .capacity-track span{background:repeating-linear-gradient(90deg,#79e5f5 0,#79e5f5 20px,#337f94 20px,#337f94 24px)}#capacity .capacity-labels{font-size:24px}#capacity .capacity-boxes{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}#capacity .mini-cap{padding:28px;min-width:0}#capacity .mini-cap>a{font-size:32px}#capacity .mini-cap p{font-size:24px}#capacity .mini-track{height:28px;margin:18px 0 22px}#capacity .drive-dots{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:8px}#capacity .drive-dots i{display:block;width:100%;height:32px;min-width:0;border:1px solid #9cf4dc60;border-radius:3px}#capacity .drive-dots i.flag{border-color:#ffe1a880}
 @media(max-width:620px){#capacity .capacity{padding:26px 20px}#capacity .capacity-main strong{font-size:60px}#capacity .capacity-meta strong{font-size:28px}#capacity .capacity-track{height:52px}#capacity .capacity-labels{font-size:21px}#capacity .capacity-boxes{grid-template-columns:1fr}#capacity .mini-cap{padding:24px 20px}#capacity .mini-cap p{font-size:22px}#capacity .drive-dots{grid-template-columns:repeat(8,minmax(0,1fr));gap:7px}#capacity .drive-dots i{height:34px}}
 @media print{body{background:#fff;color:#111}.capacity,.box,.whatbox,.volume,.fleet-strip{background:#fff;color:#111;box-shadow:none}*{text-shadow:none!important}}
-</style></head><body data-stamp="2026-10-27T09:30:58.100216"><a class="skip" href="#overview">Skip to fleet status</a><main class="wrap"><div class="edition"><b>HOME INFRASTRUCTURE / FLEET MONITOR</b><span class="preview-tag">SCHEDULED SNAPSHOT · EVERY 30 MINUTES</span></div><header class="masthead"><div><p class="kicker">Storage, at a glance</p><h1>Diskstation Fleet</h1></div><p class="snapshot">Snapshot: 2026-10-27T09:30:58.100216<br>Scheduled capture every 30 minutes, not live telemetry. Last good snapshot remains if a refresh fails.</p></header><nav class="nav" aria-label="Page sections"><a href="#overview">Fleet status</a><a href="#capacity">Capacity</a><a href="#whatbox">Whatbox</a><a href="#boxes">Box readouts</a><a href="#findings">Findings &amp; details</a></nav>
+</style></head><body data-stamp="2026-10-27T10:01:40.930083"><a class="skip" href="#overview">Skip to fleet status</a><main class="wrap"><div class="edition"><b>HOME INFRASTRUCTURE / FLEET MONITOR</b><span class="preview-tag">SCHEDULED SNAPSHOT · EVERY 30 MINUTES</span></div><header class="masthead"><div><p class="kicker">Storage, at a glance</p><h1>Diskstation Fleet</h1></div><p class="snapshot">Snapshot: 2026-10-27T10:01:40.930083<br>Scheduled capture every 30 minutes, not live telemetry. Last good snapshot remains if a refresh fails.</p></header><nav class="nav" aria-label="Page sections"><a href="#overview">Fleet status</a><a href="#capacity">Capacity</a><a href="#whatbox">Whatbox</a><a href="#boxes">Box readouts</a><a href="#findings">Findings &amp; details</a></nav>
 <section id="overview"><div class="section-head"><h2><span class="section-no">01</span>Fleet status</h2><span class="note-label">4 boxes reported in this snapshot</span></div><div class="overview-lead"><p class="lead"><span class="rust">DS2, DS4 need attention.</span><br>Boxes without high-severity findings: DS1, DS3.</p><p class="context">2 of 8 volumes are degraded. Drive flags and backup coverage are separate checks — see the readouts below.</p></div><div class="fleet-strip">
 <a class="fleet-card" href="#ds1"><div class="box-label">DS1<span aria-hidden="true">↗</span></div><span class="status "><span class="mark" aria-hidden="true">✓</span>No high-severity findings</span><p>24 drives · 132.6 / 187.1 TB used<br>0 DSM drive flags</p><p class="read-link">Inspect box</p></a>
 <a class="fleet-card" href="#ds2"><div class="box-label">DS2<span aria-hidden="true">↗</span></div><span class="status warning"><span class="mark" aria-hidden="true">!</span>Needs attention</span><p>23 drives · 22.2 / 59.6 TB used<br>1 DSM drive flags</p><p class="read-link">Inspect box</p></a>
@@ -31,32 +31,32 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
 <div class="mini-cap"><a href="#ds3">DS3</a><p>77.5 / 123.8 TB used</p><div class="mini-track " role="img" aria-label="62.6 percent used"><span style="width:62.60%"></span></div><div class="drive-dots" aria-hidden="true"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div><p>24 drives · 0 flagged</p></div>
 <div class="mini-cap"><a href="#ds4">DS4</a><p>77.2 / 109.9 TB used</p><div class="mini-track warning" role="img" aria-label="70.2 percent used"><span style="width:70.25%"></span></div><div class="drive-dots" aria-hidden="true"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="flag"></i><i class="flag"></i><i class="flag"></i><i class="flag"></i><i class="flag"></i></div><p>24 drives · 5 flagged</p></div>
 </div><p class="legend">Each small mark is one drive; amber marks are DSM flags, not physical slot positions.</p></section>
-<section class="section whatbox" id="whatbox"><div class="section-head"><h2><span class="section-no">03</span>Whatbox</h2><span class="note-label">60 samples · hour average</span></div><p class="whatbox-note">2026-10-27 08:31:01 → 2026-10-27 09:30:01 (source local time). CPU, memory and disk are our slot. Network is the whole server, a rate — no link-speed percentage is available.</p><div class="whatbox-grid">
-<div class="what-stat"><h3>CPU · our slot</h3><strong>9.0%</strong><p>of 64 host cores</p><p>5.77 cores average · no CPU cap</p></div>
-<div class="what-stat"><h3>Memory · our slot</h3><strong>85%</strong><p>of 64 GiB limit</p><p>54.5 GiB average</p></div>
-<div class="what-stat"><h3>Disk · our slot</h3><strong>50.5%</strong><p>11.1 TB of 22.0 TB</p><p>9.82 MB/s read · 22.70 MB/s write</p></div>
-<div class="what-stat"><h3>Network · whole server</h3><strong>156.6</strong><p>MB/s outbound</p><p>8.7 MB/s inbound · not slot traffic</p></div>
+<section class="section whatbox" id="whatbox"><div class="section-head"><h2><span class="section-no">03</span>Whatbox</h2><span class="note-label">60 samples · hour average</span></div><p class="whatbox-note">2026-10-27 09:02:01 → 2026-10-27 10:01:01 (source local time). CPU, memory and disk are our slot. Network is the whole server, a rate — no link-speed percentage is available.</p><div class="whatbox-grid">
+<div class="what-stat"><h3>CPU · our slot</h3><strong>9.6%</strong><p>of 64 host cores</p><p>6.13 cores average · no CPU cap</p></div>
+<div class="what-stat"><h3>Memory · our slot</h3><strong>93%</strong><p>of 64 GiB limit</p><p>59.4 GiB average</p></div>
+<div class="what-stat"><h3>Disk · our slot</h3><strong>50.6%</strong><p>11.1 TB of 22.0 TB</p><p>21.21 MB/s read · 13.66 MB/s write</p></div>
+<div class="what-stat"><h3>Network · whole server</h3><strong>170.0</strong><p>MB/s outbound</p><p>9.5 MB/s inbound · not slot traffic</p></div>
 </div><details><summary>Whatbox measurement details &amp; exact snapshot</summary><p class="note-label">CPU percentage is average cores ÷ host core count × 100, not a count of cores. GiB uses binary bytes; TB and MB/s use decimal bytes. Disk size is used + available, not a plan quota.</p><pre>{
   &quot;n&quot;: 60,
-  &quot;slot_cpu_cores_avg&quot;: 5.772235749838517,
-  &quot;slot_mem_bytes_avg&quot;: 58571574954.666664,
-  &quot;slot_io_read_bps_avg&quot;: 9815613.061655901,
-  &quot;slot_io_write_bps_avg&quot;: 22704484.915255167,
-  &quot;home_used_kb_avg&quot;: 10848498254.4,
-  &quot;home_avail_kb_avg&quot;: 10634737073.6,
-  &quot;host_net_rx_bps_avg&quot;: 8737715.78626072,
-  &quot;host_net_tx_bps_avg&quot;: 156629841.69381508,
-  &quot;window_start_local&quot;: &quot;2026-10-27 08:31:01&quot;,
-  &quot;window_end_local&quot;: &quot;2026-10-27 09:30:01&quot;,
+  &quot;slot_cpu_cores_avg&quot;: 6.127276855239905,
+  &quot;slot_mem_bytes_avg&quot;: 63819679334.4,
+  &quot;slot_io_read_bps_avg&quot;: 21210852.790400896,
+  &quot;slot_io_write_bps_avg&quot;: 13655484.193840569,
+  &quot;home_used_kb_avg&quot;: 10864158857.6,
+  &quot;home_avail_kb_avg&quot;: 10619076470.4,
+  &quot;host_net_rx_bps_avg&quot;: 9499195.760406138,
+  &quot;host_net_tx_bps_avg&quot;: 170011211.27051574,
+  &quot;window_start_local&quot;: &quot;2026-10-27 09:02:01&quot;,
+  &quot;window_end_local&quot;: &quot;2026-10-27 10:01:01&quot;,
   &quot;cpu_max&quot;: &quot;max&quot;,
   &quot;memory_max_bytes&quot;: 68719476736,
   &quot;box_cores&quot;: 64,
   &quot;cpuset&quot;: &quot;0-63&quot;,
   &quot;network_scope&quot;: &quot;host-wide; this slot has no network counter and the link speed is unreadable&quot;,
-  &quot;measured&quot;: &quot;2026-10-27T14:30:59+00:00&quot;,
+  &quot;measured&quot;: &quot;2026-10-27T15:01:42+00:00&quot;,
   &quot;source&quot;: &quot;host_metrics.db samples, last 3600s, plus cgroup limits read the same minute&quot;
 }</pre></details></section><section class="section" id="boxes"><div class="section-head"><h2><span class="section-no">04</span>Individual box readouts</h2><span class="note-label">Volumes, arrays, drive flags &amp; backups</span></div>
-<article class="box" id="ds1"><header><div><h3>DS1</h3><p class="model">Diskstation1 · DS2413+<br>DSM 6.2.4-25556 Update 8</p></div><span class="status "><span class="mark" aria-hidden="true">✓</span>No high-severity findings</span></header><div class="metrics"><div class="metric"><strong>24</strong>Physical drives</div><div class="metric"><strong>232 TB</strong>Raw capacity</div><div class="metric"><strong>35°C</strong>System · previously 37°C</div><div class="metric"><strong>9.9 days</strong>Uptime · 236:58:57 (H:MM:SS)</div></div><div class="volumes">
+<article class="box" id="ds1"><header><div><h3>DS1</h3><p class="model">Diskstation1 · DS2413+<br>DSM 6.2.4-25556 Update 8</p></div><span class="status "><span class="mark" aria-hidden="true">✓</span>No high-severity findings</span></header><div class="metrics"><div class="metric"><strong>24</strong>Physical drives</div><div class="metric"><strong>232 TB</strong>Raw capacity</div><div class="metric"><strong>35°C</strong>System · previously 37°C</div><div class="metric"><strong>9.9 days</strong>Uptime · 237:29:42 (H:MM:SS)</div></div><div class="volumes">
 <div class="volume "><div class="volume-head"><span>volume_1</span><span class="">normal</span></div><p class="vol-stat"><strong>80%</strong> used · 107.5 TB total · 21.2 TB free</p><div class="mini-track " role="img" aria-label="80 percent used"><span style="width:80%"></span></div><p class="vol-meta">Scrub: no_action<br>Last completed: 2019-08-22<br>No change in status or used % vs 2026-10-24T01:35:30-0500</p></div>
 <div class="volume "><div class="volume-head"><span>volume_2</span><span class="">normal</span></div><p class="vol-stat"><strong>58%</strong> used · 79.6 TB total · 33.3 TB free</p><div class="mini-track " role="img" aria-label="58 percent used"><span style="width:58%"></span></div><p class="vol-meta">Scrub: no_action<br>Last completed: 2026-10-21<br>No change in status or used % vs 2026-10-24T01:35:30-0500</p></div>
 </div><div class="box-note"><p><b>Array membership</b>/dev/md4: 8/8 → volume_1; /dev/md2: 12/12 → volume_1; /dev/md3: 12/12 → volume_2</p><p><b>Hyper Backup tasks</b>Remote Archiving Backup Set 1 · backupable</p></div><p class="note-label " style="margin:18px 0 0"><b>Drive flags:</b> No DSM drive flags in this snapshot</p><details><summary>Full DS1 diagnostic record &amp; previous snapshot</summary><p class="note-label">All source fields preserved, including scrub schedules as reported (which may be historical), failure counts, previous uptime, and previous volume fields.</p><pre>{
@@ -64,8 +64,8 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
   &quot;name&quot;: &quot;Diskstation1&quot;,
   &quot;model&quot;: &quot;DS2413+&quot;,
   &quot;dsm&quot;: &quot;DSM 6.2.4-25556 Update 8&quot;,
-  &quot;up_raw&quot;: &quot;236:58:57&quot;,
-  &quot;up_h&quot;: 236.9825,
+  &quot;up_raw&quot;: &quot;237:29:42&quot;,
+  &quot;up_h&quot;: 237.495,
   &quot;temp&quot;: 35,
   &quot;prev_temp&quot;: 37,
   &quot;prev_uptime&quot;: &quot;157:4:0&quot;,
@@ -151,7 +151,7 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
     }
   }
 }</pre></details></article>
-<article class="box" id="ds2"><header><div><h3>DS2</h3><p class="model">Diskstation2 · DS2411+<br>DSM 6.2.4-25556 Update 7</p></div><span class="status warning"><span class="mark" aria-hidden="true">!</span>Needs attention</span></header><div class="metrics"><div class="metric"><strong>23</strong>Physical drives</div><div class="metric"><strong>83 TB</strong>Raw capacity</div><div class="metric"><strong>37°C</strong>System · previously 39°C</div><div class="metric"><strong>9.9 days</strong>Uptime · 236:59:22 (H:MM:SS)</div></div><div class="volumes">
+<article class="box" id="ds2"><header><div><h3>DS2</h3><p class="model">Diskstation2 · DS2411+<br>DSM 6.2.4-25556 Update 7</p></div><span class="status warning"><span class="mark" aria-hidden="true">!</span>Needs attention</span></header><div class="metrics"><div class="metric"><strong>23</strong>Physical drives</div><div class="metric"><strong>83 TB</strong>Raw capacity</div><div class="metric"><strong>37°C</strong>System · previously 39°C</div><div class="metric"><strong>9.9 days</strong>Uptime · 237:30:7 (H:MM:SS)</div></div><div class="volumes">
 <div class="volume warning"><div class="volume-head"><span>volume_1</span><span class="rust">degrade</span></div><p class="vol-stat"><strong>38%</strong> used · 29.8 TB total · 18.5 TB free</p><div class="mini-track warning" role="img" aria-label="38 percent used"><span style="width:38%"></span></div><p class="vol-meta">Scrub: abnormal<br>Last completed: 2023-06-23<br>No change in status or used % vs 2026-10-24T01:35:30-0500</p></div>
 <div class="volume "><div class="volume-head"><span>volume_2</span><span class="">normal</span></div><p class="vol-stat"><strong>37%</strong> used · 29.8 TB total · 18.9 TB free</p><div class="mini-track " role="img" aria-label="37 percent used"><span style="width:37%"></span></div><p class="vol-meta">Scrub: kernel_running<br>Last completed: never<br>No change in status or used % vs 2026-10-24T01:35:30-0500</p></div>
 </div><div class="box-note"><p><b>Array membership</b>/dev/md3: 12/12 → volume_2; /dev/md2: 10/12 → volume_1</p><p><b>Hyper Backup tasks</b>Synology NAS 1 · error_detect</p></div><p class="note-label warning-text" style="margin:18px 0 0"><b>Drive flags:</b> sdpa: not_use / SMART failing · WD30EFRX-68EUZN0</p><details><summary>Full DS2 diagnostic record &amp; previous snapshot</summary><p class="note-label">All source fields preserved, including scrub schedules as reported (which may be historical), failure counts, previous uptime, and previous volume fields.</p><pre>{
@@ -159,8 +159,8 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
   &quot;name&quot;: &quot;Diskstation2&quot;,
   &quot;model&quot;: &quot;DS2411+&quot;,
   &quot;dsm&quot;: &quot;DSM 6.2.4-25556 Update 7&quot;,
-  &quot;up_raw&quot;: &quot;236:59:22&quot;,
-  &quot;up_h&quot;: 236.98944444444444,
+  &quot;up_raw&quot;: &quot;237:30:7&quot;,
+  &quot;up_h&quot;: 237.50194444444443,
   &quot;temp&quot;: 37,
   &quot;prev_temp&quot;: 39,
   &quot;prev_uptime&quot;: &quot;157:4:19&quot;,
@@ -272,7 +272,7 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
     }
   }
 }</pre></details></article>
-<article class="box" id="ds3"><header><div><h3>DS3</h3><p class="model">Diskstation3 · DS2413+<br>DSM 6.2.4-25556 Update 8</p></div><span class="status "><span class="mark" aria-hidden="true">✓</span>No high-severity findings</span></header><div class="metrics"><div class="metric"><strong>24</strong>Physical drives</div><div class="metric"><strong>157 TB</strong>Raw capacity</div><div class="metric"><strong>39°C</strong>System · previously 41°C</div><div class="metric"><strong>11.9 days</strong>Uptime · 285:4:4 (H:MM:SS)</div></div><div class="volumes">
+<article class="box" id="ds3"><header><div><h3>DS3</h3><p class="model">Diskstation3 · DS2413+<br>DSM 6.2.4-25556 Update 8</p></div><span class="status "><span class="mark" aria-hidden="true">✓</span>No high-severity findings</span></header><div class="metrics"><div class="metric"><strong>24</strong>Physical drives</div><div class="metric"><strong>157 TB</strong>Raw capacity</div><div class="metric"><strong>40°C</strong>System · previously 41°C</div><div class="metric"><strong>11.9 days</strong>Uptime · 285:34:50 (H:MM:SS)</div></div><div class="volumes">
 <div class="volume "><div class="volume-head"><span>volume_1</span><span class="">normal</span></div><p class="vol-stat"><strong>70%</strong> used · 69.7 TB total · 21.2 TB free</p><div class="mini-track " role="img" aria-label="70 percent used"><span style="width:70%"></span></div><p class="vol-meta">Scrub: no_action<br>Last completed: 2019-12-06<br>No change in status or used % vs 2026-10-24T01:35:30-0500</p></div>
 <div class="volume "><div class="volume-head"><span>volume_2</span><span class="">normal</span></div><p class="vol-stat"><strong>54%</strong> used · 54.1 TB total · 25.1 TB free</p><div class="mini-track " role="img" aria-label="54 percent used"><span style="width:54%"></span></div><p class="vol-meta">Scrub: has_not_run_yet<br>Last completed: never<br>No change in status or used % vs 2026-10-24T01:35:30-0500</p></div>
 </div><div class="box-note"><p><b>Array membership</b>/dev/md5: 7/7 → volume_2; /dev/md3: 12/12 → volume_2; /dev/md4: 10/10 → volume_1; /dev/md2: 12/12 → volume_1</p><p><b>Hyper Backup tasks</b>No backup task defined</p></div><p class="note-label " style="margin:18px 0 0"><b>Drive flags:</b> No DSM drive flags in this snapshot</p><details><summary>Full DS3 diagnostic record &amp; previous snapshot</summary><p class="note-label">All source fields preserved, including scrub schedules as reported (which may be historical), failure counts, previous uptime, and previous volume fields.</p><pre>{
@@ -280,9 +280,9 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
   &quot;name&quot;: &quot;Diskstation3&quot;,
   &quot;model&quot;: &quot;DS2413+&quot;,
   &quot;dsm&quot;: &quot;DSM 6.2.4-25556 Update 8&quot;,
-  &quot;up_raw&quot;: &quot;285:4:4&quot;,
-  &quot;up_h&quot;: 285.0677777777778,
-  &quot;temp&quot;: 39,
+  &quot;up_raw&quot;: &quot;285:34:50&quot;,
+  &quot;up_h&quot;: 285.5805555555556,
+  &quot;temp&quot;: 40,
   &quot;prev_temp&quot;: 41,
   &quot;prev_uptime&quot;: &quot;205:8:44&quot;,
   &quot;n_disks&quot;: 24,
@@ -378,7 +378,7 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
     }
   }
 }</pre></details></article>
-<article class="box" id="ds4"><header><div><h3>DS4</h3><p class="model">Diskstation4 · DS2413+<br>DSM 6.2.4-25556 Update 8</p></div><span class="status warning"><span class="mark" aria-hidden="true">!</span>Needs attention</span></header><div class="metrics"><div class="metric"><strong>24</strong>Physical drives</div><div class="metric"><strong>145 TB</strong>Raw capacity</div><div class="metric"><strong>42°C</strong>System · previously 44°C</div><div class="metric"><strong>9.9 days</strong>Uptime · 236:59:46 (H:MM:SS)</div></div><div class="volumes">
+<article class="box" id="ds4"><header><div><h3>DS4</h3><p class="model">Diskstation4 · DS2413+<br>DSM 6.2.4-25556 Update 8</p></div><span class="status warning"><span class="mark" aria-hidden="true">!</span>Needs attention</span></header><div class="metrics"><div class="metric"><strong>24</strong>Physical drives</div><div class="metric"><strong>145 TB</strong>Raw capacity</div><div class="metric"><strong>43°C</strong>System · previously 44°C</div><div class="metric"><strong>9.9 days</strong>Uptime · 237:30:30 (H:MM:SS)</div></div><div class="volumes">
 <div class="volume warning"><div class="volume-head"><span>volume_1</span><span class="rust">degrade</span></div><p class="vol-stat"><strong>80%</strong> used · 45.2 TB total · 9.1 TB free</p><div class="mini-track warning" role="img" aria-label="80 percent used"><span style="width:80%"></span></div><p class="vol-meta">Scrub: abnormal<br>Last completed: 2019-12-06<br>No change in status or used % vs 2026-10-24T01:35:30-0500</p></div>
 <div class="volume "><div class="volume-head"><span>volume_2</span><span class="">normal</span></div><p class="vol-stat"><strong>64%</strong> used · 64.7 TB total · 23.6 TB free</p><div class="mini-track " role="img" aria-label="64 percent used"><span style="width:64%"></span></div><p class="vol-meta">Scrub: no_action<br>Last completed: 2026-10-22<br>No change in status or used % vs 2026-10-24T01:35:30-0500</p></div>
 </div><div class="box-note"><p><b>Array membership</b>/dev/md6: 4/4 → volume_1; /dev/md2: 11/12 → volume_1; /dev/md4: 6/6 → volume_1; /dev/md5: 9/9 → volume_2; /dev/md3: 12/12 → volume_2</p><p><b>Hyper Backup tasks</b>No backup task defined</p></div><p class="note-label warning-text" style="margin:18px 0 0"><b>Drive flags:</b> sda: not_use / SMART normal · ST3000VX000-1CU166; sdf: system_crashed / SMART normal · ST3000VX000-1CU166; sdg: system_crashed / SMART normal · ST3000VX000-1CU166; sdh: system_crashed / SMART normal · ST3000VX000-1CU166; sdj: system_crashed / SMART normal · ST3000VX000-1CU166</p><details><summary>Full DS4 diagnostic record &amp; previous snapshot</summary><p class="note-label">All source fields preserved, including scrub schedules as reported (which may be historical), failure counts, previous uptime, and previous volume fields.</p><pre>{
@@ -386,9 +386,9 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
   &quot;name&quot;: &quot;Diskstation4&quot;,
   &quot;model&quot;: &quot;DS2413+&quot;,
   &quot;dsm&quot;: &quot;DSM 6.2.4-25556 Update 8&quot;,
-  &quot;up_raw&quot;: &quot;236:59:46&quot;,
-  &quot;up_h&quot;: 236.9961111111111,
-  &quot;temp&quot;: 42,
+  &quot;up_raw&quot;: &quot;237:30:30&quot;,
+  &quot;up_h&quot;: 237.50833333333333,
+  &quot;temp&quot;: 43,
   &quot;prev_temp&quot;: 44,
   &quot;prev_uptime&quot;: &quot;157:4:11&quot;,
   &quot;n_disks&quot;: 24,
@@ -590,9 +590,9 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
     not queried.</li>
    <li>LAN addresses, credentials and hostnames are withheld from this page.</li>
   </ul></div></div></details>
-<details><summary>Complete fleet snapshot, totals &amp; provenance</summary><p class="note-label">Fleet capture: 2026-10-27T09:30:58.100216 · comparison capture: 2026-10-24T01:35:30-0500</p><pre>{
-  &quot;stamp&quot;: &quot;2026-10-27T09:30:58.100216&quot;,
-  &quot;built&quot;: &quot;2026-10-27T09:30:58.100216&quot;,
+<details><summary>Complete fleet snapshot, totals &amp; provenance</summary><p class="note-label">Fleet capture: 2026-10-27T10:01:40.930083 · comparison capture: 2026-10-24T01:35:30-0500</p><pre>{
+  &quot;stamp&quot;: &quot;2026-10-27T10:01:40.930083&quot;,
+  &quot;built&quot;: &quot;2026-10-27T10:01:40.930083&quot;,
   &quot;totals&quot;: {
     &quot;disks&quot;: 95,
     &quot;raw&quot;: 617.0,
@@ -605,8 +605,8 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
       &quot;name&quot;: &quot;Diskstation1&quot;,
       &quot;model&quot;: &quot;DS2413+&quot;,
       &quot;dsm&quot;: &quot;DSM 6.2.4-25556 Update 8&quot;,
-      &quot;up_raw&quot;: &quot;236:58:57&quot;,
-      &quot;up_h&quot;: 236.9825,
+      &quot;up_raw&quot;: &quot;237:29:42&quot;,
+      &quot;up_h&quot;: 237.495,
       &quot;temp&quot;: 35,
       &quot;prev_temp&quot;: 37,
       &quot;prev_uptime&quot;: &quot;157:4:0&quot;,
@@ -697,8 +697,8 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
       &quot;name&quot;: &quot;Diskstation2&quot;,
       &quot;model&quot;: &quot;DS2411+&quot;,
       &quot;dsm&quot;: &quot;DSM 6.2.4-25556 Update 7&quot;,
-      &quot;up_raw&quot;: &quot;236:59:22&quot;,
-      &quot;up_h&quot;: 236.98944444444444,
+      &quot;up_raw&quot;: &quot;237:30:7&quot;,
+      &quot;up_h&quot;: 237.50194444444443,
       &quot;temp&quot;: 37,
       &quot;prev_temp&quot;: 39,
       &quot;prev_uptime&quot;: &quot;157:4:19&quot;,
@@ -815,9 +815,9 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
       &quot;name&quot;: &quot;Diskstation3&quot;,
       &quot;model&quot;: &quot;DS2413+&quot;,
       &quot;dsm&quot;: &quot;DSM 6.2.4-25556 Update 8&quot;,
-      &quot;up_raw&quot;: &quot;285:4:4&quot;,
-      &quot;up_h&quot;: 285.0677777777778,
-      &quot;temp&quot;: 39,
+      &quot;up_raw&quot;: &quot;285:34:50&quot;,
+      &quot;up_h&quot;: 285.5805555555556,
+      &quot;temp&quot;: 40,
       &quot;prev_temp&quot;: 41,
       &quot;prev_uptime&quot;: &quot;205:8:44&quot;,
       &quot;n_disks&quot;: 24,
@@ -918,9 +918,9 @@ body{background-color:var(--paper);background-image:linear-gradient(#17334a30 1p
       &quot;name&quot;: &quot;Diskstation4&quot;,
       &quot;model&quot;: &quot;DS2413+&quot;,
       &quot;dsm&quot;: &quot;DSM 6.2.4-25556 Update 8&quot;,
-      &quot;up_raw&quot;: &quot;236:59:46&quot;,
-      &quot;up_h&quot;: 236.9961111111111,
-      &quot;temp&quot;: 42,
+      &quot;up_raw&quot;: &quot;237:30:30&quot;,
+      &quot;up_h&quot;: 237.50833333333333,
+      &quot;temp&quot;: 43,
       &quot;prev_temp&quot;: 44,
       &quot;prev_uptime&quot;: &quot;157:4:11&quot;,
       &quot;n_disks&quot;: 24,

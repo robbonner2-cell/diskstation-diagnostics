@@ -1,9 +1,9 @@
 {
- "stamp": "2026-10-27T13:00:59.965718",
- "built": "2026-10-27T13:00:59.965718",
+ "stamp": "2026-10-27T14:01:20.340791",
+ "built": "2026-10-27T14:01:20.340791",
  "totals": {
   "disks": 95,
-  "raw": 617.0,
+  "raw": 620.0,
   "logical": 480.4,
   "used": 309.5
  },
@@ -13,8 +13,8 @@
    "name": "Diskstation1",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "240:28:58",
-   "up_h": 240.48277777777778,
+   "up_raw": "241:29:8",
+   "up_h": 241.48555555555555,
    "temp": 36,
    "prev_temp": 37,
    "prev_uptime": "157:4:0",
@@ -105,20 +105,20 @@
    "name": "Diskstation2",
    "model": "DS2411+",
    "dsm": "DSM 6.2.4-25556 Update 7",
-   "up_raw": "240:29:24",
-   "up_h": 240.49,
-   "temp": 38,
+   "up_raw": "0:16:32",
+   "up_h": 0.27555555555555555,
+   "temp": 39,
    "prev_temp": 39,
    "prev_uptime": "157:4:19",
    "n_disks": 23,
-   "raw_tb": 83.0,
+   "raw_tb": 86.0,
    "vols": {
     "volume_2": {
      "pct": 37,
      "tb": 29.8,
      "free_tb": 18.9,
      "scrub": "kernel_running",
-     "status": "normal",
+     "status": "background",
      "last_done": "never",
      "next": "2020-06-04",
      "failure_number": 0
@@ -154,8 +154,8 @@
     {
      "id": "sdpa",
      "status": "not_use",
-     "smart": "failing",
-     "model": "WD30EFRX-68EUZN0",
+     "smart": "normal",
+     "model": "HUS726060ALA640",
      "used": false
     }
    ],
@@ -166,6 +166,10 @@
     }
    ],
    "findings": [
+    {
+     "sev": "critical",
+     "msg": "volume_2 is background (37% full)"
+    },
     {
      "sev": "low",
      "msg": "volume_2 scrub running, progress not exposed"
@@ -183,8 +187,8 @@
      "msg": "/dev/md2 has 10/12 members (in volume_1)"
     },
     {
-     "sev": "high",
-     "msg": "sdpa (slot 10) not_use, SMART failing, WD30EFRX-68EUZN0"
+     "sev": "medium",
+     "msg": "sdpa (slot 10) not_use, SMART normal, HUS726060ALA640"
     },
     {
      "sev": "medium",
@@ -223,8 +227,8 @@
    "name": "Diskstation3",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "288:34:8",
-   "up_h": 288.56888888888886,
+   "up_raw": "289:34:29",
+   "up_h": 289.57472222222225,
    "temp": 41,
    "prev_temp": 41,
    "prev_uptime": "205:8:44",
@@ -326,9 +330,9 @@
    "name": "Diskstation4",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "240:29:49",
-   "up_h": 240.49694444444444,
-   "temp": 44,
+   "up_raw": "241:30:9",
+   "up_h": 241.5025,
+   "temp": 42,
    "prev_temp": 44,
    "prev_uptime": "157:4:11",
    "n_disks": 24,

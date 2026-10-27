@@ -23,6 +23,7 @@ import socket
 import subprocess
 import sys
 import time
+import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SKILL = os.path.expanduser("~/.hermes/skills/devops/diskstation-easymode/scripts")
@@ -268,7 +269,6 @@ print(json.dumps(r))
     w = json.loads(p.stdout)
     w["measured"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     w["source"] = "host_metrics.db samples, last 3600s, plus cgroup limits read the same minute"
-    json.dump(w, open(WHATBOX, "w"), indent=1)
     return w
 
 
@@ -306,11 +306,19 @@ def main():
             log(f"first attempt failed ({e}); clearing tunnels and retrying")
             kill_tunnels()
             model = build_model()
-        json.dump(model, open("/tmp/ds_refresh_model.json", "w"), indent=1)
         w = refresh_whatbox()
-        gen = subprocess.run([sys.executable, os.path.join(HERE, "build_site.py"),
-                              "/tmp/ds_refresh_model.json"],
-                             capture_output=True, text=True, cwd=HERE)
+        # Stage both inputs inside the repository; failed validation leaves all
+        # published artifacts, including Whatbox, at their last good values.
+        with tempfile.TemporaryDirectory(prefix=".refresh-", dir=HERE) as stage:
+            model_path = os.path.join(stage, "model.json")
+            whatbox_path = os.path.join(stage, "whatbox.json")
+            with open(model_path, "w") as fh:
+                json.dump(model, fh)
+            with open(whatbox_path, "w") as fh:
+                json.dump(w, fh)
+            gen = subprocess.run([sys.executable, os.path.join(HERE, "build_site.py"),
+                                  model_path, whatbox_path],
+                                 capture_output=True, text=True, cwd=HERE)
         if gen.returncode != 0:
             raise RuntimeError(f"build failed: {gen.stderr.strip()[-400:]}")
         log(f'built stamp={model["stamp"]} whatbox={w["n"]} samples '

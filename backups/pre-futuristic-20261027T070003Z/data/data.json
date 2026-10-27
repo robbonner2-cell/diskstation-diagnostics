@@ -1,0 +1,504 @@
+{
+ "stamp": "2026-10-27T01:30:38.906724",
+ "built": "2026-10-27T01:30:38.906724",
+ "totals": {
+  "disks": 95,
+  "raw": 617.0,
+  "logical": 480.4,
+  "used": 309.5
+ },
+ "boxes": [
+  {
+   "id": "ds1",
+   "name": "Diskstation1",
+   "model": "DS2413+",
+   "dsm": "DSM 6.2.4-25556 Update 8",
+   "up_raw": "228:58:53",
+   "up_h": 228.9813888888889,
+   "temp": 38,
+   "prev_temp": 37,
+   "prev_uptime": "157:4:0",
+   "n_disks": 24,
+   "raw_tb": 232.0,
+   "vols": {
+    "volume_1": {
+     "pct": 80,
+     "tb": 107.5,
+     "free_tb": 21.2,
+     "scrub": "no_action",
+     "status": "normal",
+     "last_done": "2019-08-22",
+     "next": "2025-11-14",
+     "failure_number": 0
+    },
+    "volume_2": {
+     "pct": 58,
+     "tb": 79.6,
+     "free_tb": 33.3,
+     "scrub": "no_action",
+     "status": "normal",
+     "last_done": "2026-10-21",
+     "next": "2025-11-14",
+     "failure_number": 0
+    }
+   },
+   "arrays": [
+    {
+     "raid": "/dev/md4",
+     "vol": "volume_1",
+     "have": 8,
+     "need": 8,
+     "dfn": 0
+    },
+    {
+     "raid": "/dev/md2",
+     "vol": "volume_1",
+     "have": 12,
+     "need": 12,
+     "dfn": 0
+    },
+    {
+     "raid": "/dev/md3",
+     "vol": "volume_2",
+     "have": 12,
+     "need": 12,
+     "dfn": 0
+    }
+   ],
+   "bad_disks": [],
+   "backups": [
+    {
+     "name": "Remote Archiving Backup Set 1",
+     "state": "backupable"
+    }
+   ],
+   "findings": [],
+   "prev_vols": {
+    "volume_1": {
+     "id": "volume_1",
+     "status": "normal",
+     "pct": 80,
+     "tb": 107.5,
+     "free_tb": 21.2,
+     "scrub": "no_action",
+     "progress_percent": "-1",
+     "progress_step": "none",
+     "device_type": "shr_with_2_disk_protect",
+     "disk_failure_number": 0
+    },
+    "volume_2": {
+     "id": "volume_2",
+     "status": "normal",
+     "pct": 58,
+     "tb": 79.6,
+     "free_tb": 33.3,
+     "scrub": "no_action",
+     "progress_percent": "-1",
+     "progress_step": "none",
+     "device_type": "shr_with_2_disk_protect",
+     "disk_failure_number": 0
+    }
+   }
+  },
+  {
+   "id": "ds2",
+   "name": "Diskstation2",
+   "model": "DS2411+",
+   "dsm": "DSM 6.2.4-25556 Update 7",
+   "up_raw": "228:59:15",
+   "up_h": 228.9875,
+   "temp": 40,
+   "prev_temp": 39,
+   "prev_uptime": "157:4:19",
+   "n_disks": 23,
+   "raw_tb": 83.0,
+   "vols": {
+    "volume_2": {
+     "pct": 37,
+     "tb": 29.8,
+     "free_tb": 18.9,
+     "scrub": "kernel_running",
+     "status": "normal",
+     "last_done": "never",
+     "next": "2020-06-04",
+     "failure_number": 0
+    },
+    "volume_1": {
+     "pct": 38,
+     "tb": 29.8,
+     "free_tb": 18.5,
+     "scrub": "abnormal",
+     "status": "degrade",
+     "last_done": "2023-06-23",
+     "next": "2020-06-04",
+     "failure_number": 2
+    }
+   },
+   "arrays": [
+    {
+     "raid": "/dev/md3",
+     "vol": "volume_2",
+     "have": 12,
+     "need": 12,
+     "dfn": 0
+    },
+    {
+     "raid": "/dev/md2",
+     "vol": "volume_1",
+     "have": 10,
+     "need": 12,
+     "dfn": 2
+    }
+   ],
+   "bad_disks": [
+    {
+     "id": "sdpa",
+     "status": "not_use",
+     "smart": "failing",
+     "model": "WD30EFRX-68EUZN0",
+     "used": false
+    }
+   ],
+   "backups": [
+    {
+     "name": "Synology NAS 1",
+     "state": "error_detect"
+    }
+   ],
+   "findings": [
+    {
+     "sev": "low",
+     "msg": "volume_2 scrub running, progress not exposed"
+    },
+    {
+     "sev": "critical",
+     "msg": "volume_1 is degrade (38% full)"
+    },
+    {
+     "sev": "high",
+     "msg": "volume_1 scrubbingStatus=abnormal"
+    },
+    {
+     "sev": "critical",
+     "msg": "/dev/md2 has 10/12 members (in volume_1)"
+    },
+    {
+     "sev": "high",
+     "msg": "sdpa (slot 10) not_use, SMART failing, WD30EFRX-68EUZN0"
+    },
+    {
+     "sev": "medium",
+     "msg": "backup \"Synology NAS 1\" reports error_detect"
+    }
+   ],
+   "prev_vols": {
+    "volume_2": {
+     "id": "volume_2",
+     "status": "normal",
+     "pct": 37,
+     "tb": 29.8,
+     "free_tb": 18.9,
+     "scrub": "kernel_running",
+     "progress_percent": "-1",
+     "progress_step": "none",
+     "device_type": "shr_with_2_disk_protect",
+     "disk_failure_number": 0
+    },
+    "volume_1": {
+     "id": "volume_1",
+     "status": "degrade",
+     "pct": 38,
+     "tb": 29.8,
+     "free_tb": 18.5,
+     "scrub": "abnormal",
+     "progress_percent": "-1",
+     "progress_step": "none",
+     "device_type": "shr_with_2_disk_protect",
+     "disk_failure_number": 2
+    }
+   }
+  },
+  {
+   "id": "ds3",
+   "name": "Diskstation3",
+   "model": "DS2413+",
+   "dsm": "DSM 6.2.4-25556 Update 8",
+   "up_raw": "277:3:53",
+   "up_h": 277.0647222222222,
+   "temp": 42,
+   "prev_temp": 41,
+   "prev_uptime": "205:8:44",
+   "n_disks": 24,
+   "raw_tb": 157.0,
+   "vols": {
+    "volume_2": {
+     "pct": 54,
+     "tb": 54.1,
+     "free_tb": 25.1,
+     "scrub": "has_not_run_yet",
+     "status": "normal",
+     "last_done": "never",
+     "next": "2019-09-15",
+     "failure_number": 0
+    },
+    "volume_1": {
+     "pct": 70,
+     "tb": 69.7,
+     "free_tb": 21.2,
+     "scrub": "no_action",
+     "status": "normal",
+     "last_done": "2019-12-06",
+     "next": "2019-09-15",
+     "failure_number": 0
+    }
+   },
+   "arrays": [
+    {
+     "raid": "/dev/md5",
+     "vol": "volume_2",
+     "have": 7,
+     "need": 7,
+     "dfn": 0
+    },
+    {
+     "raid": "/dev/md3",
+     "vol": "volume_2",
+     "have": 12,
+     "need": 12,
+     "dfn": 0
+    },
+    {
+     "raid": "/dev/md4",
+     "vol": "volume_1",
+     "have": 10,
+     "need": 10,
+     "dfn": 0
+    },
+    {
+     "raid": "/dev/md2",
+     "vol": "volume_1",
+     "have": 12,
+     "need": 12,
+     "dfn": 0
+    }
+   ],
+   "bad_disks": [],
+   "backups": [],
+   "findings": [
+    {
+     "sev": "low",
+     "msg": "volume_2 never scrubbed"
+    },
+    {
+     "sev": "low",
+     "msg": "no backup task defined"
+    }
+   ],
+   "prev_vols": {
+    "volume_2": {
+     "id": "volume_2",
+     "status": "normal",
+     "pct": 54,
+     "tb": 54.1,
+     "free_tb": 25.1,
+     "scrub": "has_not_run_yet",
+     "progress_percent": "-1",
+     "progress_step": "none",
+     "device_type": "shr_with_2_disk_protect",
+     "disk_failure_number": 0
+    },
+    "volume_1": {
+     "id": "volume_1",
+     "status": "normal",
+     "pct": 70,
+     "tb": 69.7,
+     "free_tb": 21.2,
+     "scrub": "no_action",
+     "progress_percent": "-1",
+     "progress_step": "none",
+     "device_type": "shr_with_2_disk_protect",
+     "disk_failure_number": 0
+    }
+   }
+  },
+  {
+   "id": "ds4",
+   "name": "Diskstation4",
+   "model": "DS2413+",
+   "dsm": "DSM 6.2.4-25556 Update 8",
+   "up_raw": "228:59:29",
+   "up_h": 228.99138888888888,
+   "temp": 46,
+   "prev_temp": 44,
+   "prev_uptime": "157:4:11",
+   "n_disks": 24,
+   "raw_tb": 145.0,
+   "vols": {
+    "volume_1": {
+     "pct": 80,
+     "tb": 45.2,
+     "free_tb": 9.1,
+     "scrub": "abnormal",
+     "status": "degrade",
+     "last_done": "2019-12-06",
+     "next": "2019-10-15",
+     "failure_number": 1
+    },
+    "volume_2": {
+     "pct": 64,
+     "tb": 64.7,
+     "free_tb": 23.6,
+     "scrub": "no_action",
+     "status": "normal",
+     "last_done": "2026-10-22",
+     "next": "2019-10-15",
+     "failure_number": 0
+    }
+   },
+   "arrays": [
+    {
+     "raid": "/dev/md6",
+     "vol": "volume_1",
+     "have": 4,
+     "need": 4,
+     "dfn": 1
+    },
+    {
+     "raid": "/dev/md2",
+     "vol": "volume_1",
+     "have": 11,
+     "need": 12,
+     "dfn": 1
+    },
+    {
+     "raid": "/dev/md4",
+     "vol": "volume_1",
+     "have": 6,
+     "need": 6,
+     "dfn": 1
+    },
+    {
+     "raid": "/dev/md5",
+     "vol": "volume_2",
+     "have": 9,
+     "need": 9,
+     "dfn": 0
+    },
+    {
+     "raid": "/dev/md3",
+     "vol": "volume_2",
+     "have": 12,
+     "need": 12,
+     "dfn": 0
+    }
+   ],
+   "bad_disks": [
+    {
+     "id": "sda",
+     "status": "not_use",
+     "smart": "normal",
+     "model": "ST3000VX000-1CU166",
+     "used": false
+    },
+    {
+     "id": "sdf",
+     "status": "system_crashed",
+     "smart": "normal",
+     "model": "ST3000VX000-1CU166",
+     "used": true
+    },
+    {
+     "id": "sdg",
+     "status": "system_crashed",
+     "smart": "normal",
+     "model": "ST3000VX000-1CU166",
+     "used": true
+    },
+    {
+     "id": "sdh",
+     "status": "system_crashed",
+     "smart": "normal",
+     "model": "ST3000VX000-1CU166",
+     "used": true
+    },
+    {
+     "id": "sdj",
+     "status": "system_crashed",
+     "smart": "normal",
+     "model": "ST3000VX000-1CU166",
+     "used": true
+    }
+   ],
+   "backups": [],
+   "findings": [
+    {
+     "sev": "critical",
+     "msg": "volume_1 is degrade (80% full)"
+    },
+    {
+     "sev": "high",
+     "msg": "volume_1 scrubbingStatus=abnormal"
+    },
+    {
+     "sev": "critical",
+     "msg": "/dev/md2 has 11/12 members (in volume_1)"
+    },
+    {
+     "sev": "medium",
+     "msg": "sda (slot 1) not_use, SMART normal, ST3000VX000-1CU166"
+    },
+    {
+     "sev": "low",
+     "msg": "sdf (slot 6) system_crashed, SMART normal, ST3000VX000-1CU166"
+    },
+    {
+     "sev": "low",
+     "msg": "sdg (slot 7) system_crashed, SMART normal, ST3000VX000-1CU166"
+    },
+    {
+     "sev": "low",
+     "msg": "sdh (slot 8) system_crashed, SMART normal, ST3000VX000-1CU166"
+    },
+    {
+     "sev": "low",
+     "msg": "sdj (slot 10) system_crashed, SMART normal, ST3000VX000-1CU166"
+    },
+    {
+     "sev": "low",
+     "msg": "no backup task defined"
+    }
+   ],
+   "prev_vols": {
+    "volume_1": {
+     "id": "volume_1",
+     "status": "degrade",
+     "pct": 80,
+     "tb": 45.2,
+     "free_tb": 9.1,
+     "scrub": "abnormal",
+     "progress_percent": "-1",
+     "progress_step": "none",
+     "device_type": "shr_with_2_disk_protect",
+     "disk_failure_number": 1
+    },
+    "volume_2": {
+     "id": "volume_2",
+     "status": "normal",
+     "pct": 64,
+     "tb": 64.7,
+     "free_tb": 23.6,
+     "scrub": "no_action",
+     "progress_percent": "-1",
+     "progress_step": "none",
+     "device_type": "shr_with_2_disk_protect",
+     "disk_failure_number": 0
+    }
+   }
+  }
+ ],
+ "prev_taken": "2026-10-24T01:35:30-0500",
+ "checks": {
+  "passed": 13,
+  "total": 13
+ }
+}

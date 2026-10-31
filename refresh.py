@@ -125,6 +125,32 @@ def prev_snapshot():
     return os.path.join(DS_SNAPS, cands[-1]) if cands else None
 
 
+def prev_published():
+    """Per-box disk counts and totals from the LAST PUBLISHED data.json.
+
+    This check used to be the literal `totals["disks"] == 95`. On 2026-10-27 a
+    disk was legitimately added to ds2 (95 -> 96 spindles) and from 15:00 that
+    day EVERY run failed `spindle total stable (95) [96]`, so nothing published
+    for four days while all four boxes were answering. Compare against what is
+    actually published instead: a disk appearing is news (publish it and say so
+    in a finding), a disk vanishing is a fault (block).
+    """
+    try:
+        with open(DATA) as fh:
+            pub = json.load(fh)
+    except (OSError, ValueError):
+        return None
+    if not isinstance(pub, dict) or not isinstance(pub.get("totals"), dict):
+        return None
+    per_box = {}
+    for b in pub.get("boxes") or []:
+        try:
+            per_box[b["id"]] = int(b["n_disks"])
+        except (KeyError, TypeError, ValueError):
+            continue
+    return {"totals": pub["totals"], "per_box": per_box}
+
+
 def slot_map(st):
     """DSM gives slot_id per drive; the collector's model drops it, so keep it here."""
     return {d.get("id"): d.get("slot_id") for d in st.get("disks") or []
@@ -172,7 +198,7 @@ def findings_for(b, slots=None):
     return out
 
 
-def self_checks(boxes, totals):
+def self_checks(boxes, totals, prev=None):
     """Real assertions on this pull. The count is published on the page."""
     ck = []
 
@@ -186,7 +212,14 @@ def self_checks(boxes, totals):
         [len(b["vols"]) for b in boxes])
     add("capacity sums are non-zero", totals["logical"] > 0 and totals["used"] > 0,
         f'{totals["logical"]}/{totals["used"]}')
-    add("spindle total stable (95)", totals["disks"] == 95, totals["disks"])
+    base = (prev or {}).get("totals", {}).get("disks")
+    if base is None:
+        add("spindle total plausible", 50 <= totals["disks"] <= 150, totals["disks"])
+    else:
+        lost = [b["id"] for b in boxes
+                if int(b["n_disks"]) < int(((prev or {}).get("per_box") or {}).get(b["id"], 0))]
+        add("no box lost a spindle", not lost,
+            f'{totals["disks"]} now vs {base} published; lost={lost or "none"}')
     add("raw capacity plausible", totals["raw"] > 500, f'{totals["raw"]} TB')
     add("logical <= raw", totals["logical"] <= totals["raw"] + 1,
         f'{totals["logical"]} vs {totals["raw"]}')
@@ -216,8 +249,16 @@ def build_model():
         data["name"], data["ip"] = name, lan
         live[bid] = data
     boxes, prev_taken = mod.build_model(live, prev_snapshot())
+    prev = prev_published()
     for b in boxes:
         b["findings"] = findings_for(b, slot_map(live[b["id"]]["st"]))
+        was = (prev or {}).get("per_box", {}).get(b["id"])
+        if was is not None and int(b["n_disks"]) != int(was):
+            gained = int(b["n_disks"]) > int(was)
+            b["findings"].append({
+                "sev": "low" if gained else "critical",
+                "msg": f'spindle count changed since the last published snapshot: '
+                       f'{was} -> {b["n_disks"]}'})
     totals = {
         "disks": sum(int(b["n_disks"]) for b in boxes),
         "raw": round(sum(float(b["raw_tb"]) for b in boxes), 1),
@@ -225,7 +266,7 @@ def build_model():
         "used": round(sum(v["tb"] - v["free_tb"] for b in boxes
                           for v in b["vols"].values()), 1),
     }
-    ck = self_checks(boxes, totals)
+    ck = self_checks(boxes, totals, prev)
     passed = sum(1 for _, ok, _ in ck if ok)
     for name, ok, detail in ck:
         if not ok:

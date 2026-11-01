@@ -58,6 +58,32 @@ class BuildTests(unittest.TestCase):
                 self.run_build(m, ok=False)
                 self.assertEqual(before, self.outputs())
 
+    def test_added_disk_renders_when_the_total_agrees(self):
+        # 2026-10-27 regression: ds2 gained a disk (23 -> 24). The renderer must
+        # publish it, not refuse the build, as long as per-box and total agree.
+        m = copy.deepcopy(self.model)
+        ds2 = next(b for b in m['boxes'] if b['id'] == 'ds2')
+        ds2['n_disks'] += 1
+        m['totals']['disks'] += 1
+        page = self.run_build(m)
+        self.assertEqual(page.count('<i class="'), m['totals']['disks'])
+        self.assertEqual(json.loads((self.p/'data/data.json').read_text())['totals']['disks'],
+                         m['totals']['disks'])
+
+    def test_box_over_the_bay_ceiling_refused(self):
+        for mutation in ('over_ceiling', 'total_disagrees'):
+            with self.subTest(case=mutation):
+                m = copy.deepcopy(self.model)
+                ds2 = next(b for b in m['boxes'] if b['id'] == 'ds2')
+                ds2['n_disks'] = 25 if mutation == 'over_ceiling' else 24
+                if mutation == 'total_disagrees':
+                    m['totals']['disks'] = 95   # sum is now 96
+                else:
+                    m['totals']['disks'] = 97
+                before = self.outputs()
+                self.run_build(m, ok=False)
+                self.assertEqual(before, self.outputs())
+
     def test_invalid_whatbox_keeps_all_outputs(self):
         w = copy.deepcopy(self.w)
         w['n'] = 0

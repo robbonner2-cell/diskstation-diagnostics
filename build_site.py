@@ -29,7 +29,14 @@ def validate(d):
     boxes=d['boxes']; t=d['totals']; ck=d['checks']
     require(len(boxes)==4 and {b['id'] for b in boxes}=={'ds1','ds2','ds3','ds4'}, 'four unique boxes required')
     require(sum(len(b['vols']) for b in boxes)==8, 'eight volumes required')
-    require(sum(b['n_disks'] for b in boxes)==t['disks']==95, '95 drives required')
+    # NOT a hardcoded fleet size: a disk added to a box is news, not a defect
+    # (2026-10-27 ds2 went 23 -> 24 and this line then refused every build for
+    # four days). What must hold is the per-box ceiling (12 internal bays plus 12
+    # on the eSATA port multiplier) and agreement with the published total.
+    per_box=[b['n_disks'] for b in boxes]
+    require(all(isinstance(n,int) and 0<n<=24 for n in per_box),
+            'invalid disk count per box (ceiling is 24)')
+    require(sum(per_box)==t['disks'], 'disk total does not match the boxes')
     require(ck['passed']==ck['total'] and ck['total']>0,'source checks failed')
     for b in boxes:
         require(isinstance(b['n_disks'],int) and b['n_disks']>0, 'invalid disk count')
@@ -107,7 +114,8 @@ parts.append('<p class="note-label">A DSM flag is not proof of hardware failure.
 parts.append('<details><summary>Complete fleet snapshot, totals &amp; provenance</summary><p class="note-label">Fleet capture: '+e(D['stamp'])+' · comparison capture: '+e(D.get('prev_taken') or 'unknown')+'</p><pre>'+e(json.dumps(D,indent=2))+'</pre></details><footer><span>Scheduled snapshot every 30 minutes. Not live data. No external assets.</span><span><a href="backups/pre-futuristic-20261027T070003Z/index.html">Compare archived production snapshot</a> · <a href="#overview">Back to status ↑</a></span></footer></section></main></body></html>')
 out='\n'.join(parts)
 data_txt=json.dumps(D,indent=1)+'\n'
-require(out.count('<i class="')==95, '95 drive markers required')
+# One marker per spindle in THIS snapshot, whatever the fleet size is now.
+require(out.count('<i class="')==D['totals']['disks'], 'drive markers do not match the fleet total')
 require('data-stamp="'+e(D['stamp'])+'"' in out, 'missing page timestamp')
 require(sanitize(out)==out and sanitize(data_txt)==data_txt, 'private data leaked')
 for pat in (r'<script',r'@import',r'(?:src|href)\s*=\s*["\']https?://'):

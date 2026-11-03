@@ -1,6 +1,6 @@
 {
- "stamp": "2026-11-03T02:30:37.961426",
- "built": "2026-11-03T02:30:37.961426",
+ "stamp": "2026-11-03T03:00:34.541739",
+ "built": "2026-11-03T03:00:34.541739",
  "totals": {
   "disks": 96,
   "raw": 623.0,
@@ -13,8 +13,8 @@
    "name": "Diskstation1",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "51:32:42",
-   "up_h": 51.545,
+   "up_raw": "52:2:38",
+   "up_h": 52.04388888888889,
    "temp": 38,
    "prev_temp": 37,
    "prev_uptime": "157:4:0",
@@ -105,9 +105,9 @@
    "name": "Diskstation2",
    "model": "DS2411+",
    "dsm": "DSM 6.2.4-25556 Update 7",
-   "up_raw": "51:33:16",
-   "up_h": 51.55444444444444,
-   "temp": 40,
+   "up_raw": "52:3:13",
+   "up_h": 52.05361111111111,
+   "temp": 39,
    "prev_temp": 39,
    "prev_uptime": "157:4:19",
    "n_disks": 24,
@@ -127,8 +127,8 @@
      "pct": 38,
      "tb": 29.8,
      "free_tb": 18.5,
-     "scrub": "wait_for_another_operation",
-     "status": "background",
+     "scrub": "no_action",
+     "status": "normal",
      "last_done": "2023-06-23",
      "next": "2020-06-04",
      "failure_number": 0
@@ -145,7 +145,7 @@
     {
      "raid": "/dev/md2",
      "vol": "volume_1",
-     "have": 11,
+     "have": 12,
      "need": 12,
      "dfn": 0
     }
@@ -176,15 +176,7 @@
     },
     {
      "sev": "critical",
-     "msg": "volume_1 is background (38% full)"
-    },
-    {
-     "sev": "critical",
      "msg": "/dev/md3 has 11/12 members (in volume_2)"
-    },
-    {
-     "sev": "critical",
-     "msg": "/dev/md2 has 11/12 members (in volume_1)"
     },
     {
      "sev": "medium",
@@ -227,9 +219,9 @@
    "name": "Diskstation3",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "51:32:58",
-   "up_h": 51.54944444444445,
-   "temp": 41,
+   "up_raw": "52:2:54",
+   "up_h": 52.04833333333333,
+   "temp": 42,
    "prev_temp": 41,
    "prev_uptime": "205:8:44",
    "n_disks": 24,
@@ -330,9 +322,9 @@
    "name": "Diskstation4",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "59:6:56",
-   "up_h": 59.11555555555555,
-   "temp": 43,
+   "up_raw": "59:36:52",
+   "up_h": 59.614444444444445,
+   "temp": 44,
    "prev_temp": 44,
    "prev_uptime": "157:4:11",
    "n_disks": 24,

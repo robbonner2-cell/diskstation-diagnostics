@@ -1,6 +1,6 @@
 {
- "stamp": "2026-11-03T12:30:51.371835",
- "built": "2026-11-03T12:30:51.371835",
+ "stamp": "2026-11-03T13:00:50.651757",
+ "built": "2026-11-03T13:00:50.651757",
  "totals": {
   "disks": 96,
   "raw": 623.0,
@@ -13,9 +13,9 @@
    "name": "Diskstation1",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "61:32:45",
-   "up_h": 61.545833333333334,
-   "temp": 36,
+   "up_raw": "62:2:45",
+   "up_h": 62.045833333333334,
+   "temp": 37,
    "prev_temp": 37,
    "prev_uptime": "157:4:0",
    "n_disks": 24,
@@ -105,8 +105,8 @@
    "name": "Diskstation2",
    "model": "DS2411+",
    "dsm": "DSM 6.2.4-25556 Update 7",
-   "up_raw": "61:33:21",
-   "up_h": 61.55583333333333,
+   "up_raw": "62:3:21",
+   "up_h": 62.05583333333333,
    "temp": 39,
    "prev_temp": 39,
    "prev_uptime": "157:4:19",
@@ -219,8 +219,8 @@
    "name": "Diskstation3",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "61:33:5",
-   "up_h": 61.55138888888889,
+   "up_raw": "62:3:5",
+   "up_h": 62.05138888888889,
    "temp": 41,
    "prev_temp": 41,
    "prev_uptime": "205:8:44",
@@ -322,9 +322,9 @@
    "name": "Diskstation4",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "69:7:8",
-   "up_h": 69.11888888888889,
-   "temp": 47,
+   "up_raw": "69:37:7",
+   "up_h": 69.61861111111111,
+   "temp": 48,
    "prev_temp": 44,
    "prev_uptime": "157:4:11",
    "n_disks": 24,
@@ -388,36 +388,7 @@
      "dfn": 0
     }
    ],
-   "bad_disks": [
-    {
-     "id": "sdf",
-     "status": "system_crashed",
-     "smart": "normal",
-     "model": "ST3000VX000-1CU166",
-     "used": true
-    },
-    {
-     "id": "sdg",
-     "status": "system_crashed",
-     "smart": "normal",
-     "model": "ST3000VX000-1CU166",
-     "used": true
-    },
-    {
-     "id": "sdh",
-     "status": "system_crashed",
-     "smart": "normal",
-     "model": "ST3000VX000-1CU166",
-     "used": true
-    },
-    {
-     "id": "sdj",
-     "status": "system_crashed",
-     "smart": "normal",
-     "model": "ST3000VX000-1CU166",
-     "used": true
-    }
-   ],
+   "bad_disks": [],
    "backups": [],
    "findings": [
     {
@@ -427,22 +398,6 @@
     {
      "sev": "critical",
      "msg": "/dev/md2 has 11/12 members (in volume_1)"
-    },
-    {
-     "sev": "low",
-     "msg": "sdf (slot 6) system_crashed, SMART normal, ST3000VX000-1CU166"
-    },
-    {
-     "sev": "low",
-     "msg": "sdg (slot 7) system_crashed, SMART normal, ST3000VX000-1CU166"
-    },
-    {
-     "sev": "low",
-     "msg": "sdh (slot 8) system_crashed, SMART normal, ST3000VX000-1CU166"
-    },
-    {
-     "sev": "low",
-     "msg": "sdj (slot 10) system_crashed, SMART normal, ST3000VX000-1CU166"
     },
     {
      "sev": "low",

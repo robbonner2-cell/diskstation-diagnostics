@@ -15,6 +15,6 @@
  "box_cores": 64,
  "cpuset": "0-63",
  "network_scope": "host-wide; this slot has no network counter and the link speed is unreadable",
- "measured": "2026-11-03T08:00:35+00:00",
+ "measured": "2026-11-03T08:00:38+00:00",
  "source": "host_metrics.db samples, last 3600s, plus cgroup limits read the same minute"
 }

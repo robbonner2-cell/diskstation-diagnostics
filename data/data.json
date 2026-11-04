@@ -1,6 +1,6 @@
 {
- "stamp": "2026-11-04T09:30:50.907882",
- "built": "2026-11-04T09:30:50.907882",
+ "stamp": "2026-11-04T10:00:48.571285",
+ "built": "2026-11-04T10:00:48.571285",
  "totals": {
   "disks": 96,
   "raw": 623.0,
@@ -13,9 +13,9 @@
    "name": "Diskstation1",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "82:32:48",
-   "up_h": 82.54666666666667,
-   "temp": 36,
+   "up_raw": "83:2:47",
+   "up_h": 83.04638888888888,
+   "temp": 35,
    "prev_temp": 37,
    "prev_uptime": "157:4:0",
    "n_disks": 24,
@@ -105,8 +105,8 @@
    "name": "Diskstation2",
    "model": "DS2411+",
    "dsm": "DSM 6.2.4-25556 Update 7",
-   "up_raw": "82:33:22",
-   "up_h": 82.55611111111111,
+   "up_raw": "83:3:20",
+   "up_h": 83.05555555555556,
    "temp": 38,
    "prev_temp": 39,
    "prev_uptime": "157:4:19",
@@ -219,8 +219,8 @@
    "name": "Diskstation3",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "82:33:6",
-   "up_h": 82.55166666666666,
+   "up_raw": "83:3:6",
+   "up_h": 83.05166666666666,
    "temp": 40,
    "prev_temp": 41,
    "prev_uptime": "205:8:44",
@@ -322,9 +322,9 @@
    "name": "Diskstation4",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "90:7:7",
-   "up_h": 90.11861111111111,
-   "temp": 47,
+   "up_raw": "90:37:6",
+   "up_h": 90.61833333333334,
+   "temp": 42,
    "prev_temp": 44,
    "prev_uptime": "157:4:11",
    "n_disks": 24,
@@ -334,8 +334,8 @@
      "pct": 80,
      "tb": 45.2,
      "free_tb": 9.1,
-     "scrub": "wait_for_another_operation",
-     "status": "background",
+     "scrub": "no_action",
+     "status": "normal",
      "last_done": "2019-12-06",
      "next": "2019-10-15",
      "failure_number": 0
@@ -362,7 +362,7 @@
     {
      "raid": "/dev/md2",
      "vol": "volume_1",
-     "have": 11,
+     "have": 12,
      "need": 12,
      "dfn": 0
     },
@@ -391,14 +391,6 @@
    "bad_disks": [],
    "backups": [],
    "findings": [
-    {
-     "sev": "critical",
-     "msg": "volume_1 is background (80% full)"
-    },
-    {
-     "sev": "critical",
-     "msg": "/dev/md2 has 11/12 members (in volume_1)"
-    },
     {
      "sev": "low",
      "msg": "no backup task defined"

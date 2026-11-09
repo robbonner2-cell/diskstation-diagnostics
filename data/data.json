@@ -1,6 +1,6 @@
 {
- "stamp": "2026-11-09T15:30:49.963097",
- "built": "2026-11-09T15:30:49.963097",
+ "stamp": "2026-11-09T16:01:06.606653",
+ "built": "2026-11-09T16:01:06.606653",
  "totals": {
   "disks": 96,
   "raw": 623.0,
@@ -13,8 +13,8 @@
    "name": "Diskstation1",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "208:32:59",
-   "up_h": 208.54972222222221,
+   "up_raw": "209:3:1",
+   "up_h": 209.05027777777778,
    "temp": 34,
    "prev_temp": 37,
    "prev_uptime": "157:4:0",
@@ -105,8 +105,8 @@
    "name": "Diskstation2",
    "model": "DS2411+",
    "dsm": "DSM 6.2.4-25556 Update 7",
-   "up_raw": "0:33:47",
-   "up_h": 0.5630555555555555,
+   "up_raw": "1:3:54",
+   "up_h": 1.065,
    "temp": 37,
    "prev_temp": 39,
    "prev_uptime": "157:4:19",
@@ -117,11 +117,11 @@
      "pct": 37,
      "tb": 29.8,
      "free_tb": 18.9,
-     "scrub": "abnormal",
-     "status": "degrade",
+     "scrub": "wait_for_another_operation",
+     "status": "repairing",
      "last_done": "2026-10-29",
      "next": "2020-06-04",
-     "failure_number": 1
+     "failure_number": 0
     },
     "volume_1": {
      "pct": 38,
@@ -140,7 +140,7 @@
      "vol": "volume_2",
      "have": 11,
      "need": 12,
-     "dfn": 1
+     "dfn": 0
     },
     {
      "raid": "/dev/md2",
@@ -157,13 +157,6 @@
      "smart": "normal",
      "model": "ST3000VX000",
      "used": false
-    },
-    {
-     "id": "sdpa",
-     "status": "not_use",
-     "smart": "normal",
-     "model": "HUS726060ALA640",
-     "used": false
     }
    ],
    "backups": [
@@ -175,11 +168,7 @@
    "findings": [
     {
      "sev": "critical",
-     "msg": "volume_2 is degrade (37% full)"
-    },
-    {
-     "sev": "high",
-     "msg": "volume_2 scrubbingStatus=abnormal"
+     "msg": "volume_2 is repairing (37% full)"
     },
     {
      "sev": "critical",
@@ -200,10 +189,6 @@
     {
      "sev": "medium",
      "msg": "sdmb (slot 2) not_use, SMART normal, ST3000VX000"
-    },
-    {
-     "sev": "medium",
-     "msg": "sdpa (slot 10) not_use, SMART normal, HUS726060ALA640"
     },
     {
      "sev": "medium",
@@ -242,8 +227,8 @@
    "name": "Diskstation3",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "208:33:13",
-   "up_h": 208.5536111111111,
+   "up_raw": "209:3:23",
+   "up_h": 209.05638888888888,
    "temp": 39,
    "prev_temp": 41,
    "prev_uptime": "205:8:44",
@@ -345,8 +330,8 @@
    "name": "Diskstation4",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "216:7:12",
-   "up_h": 216.12,
+   "up_raw": "216:37:27",
+   "up_h": 216.62416666666667,
    "temp": 41,
    "prev_temp": 44,
    "prev_uptime": "157:4:11",

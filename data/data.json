@@ -1,6 +1,6 @@
 {
- "stamp": "2026-11-11T12:01:50.501060",
- "built": "2026-11-11T12:01:50.501060",
+ "stamp": "2026-11-11T14:02:51.238846",
+ "built": "2026-11-11T14:02:51.238846",
  "totals": {
   "disks": 96,
   "raw": 623.0,
@@ -13,8 +13,8 @@
    "name": "Diskstation1",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "253:3:4",
-   "up_h": 253.0511111111111,
+   "up_raw": "255:4:19",
+   "up_h": 255.07194444444445,
    "temp": 34,
    "prev_temp": 37,
    "prev_uptime": "157:4:0",
@@ -105,9 +105,9 @@
    "name": "Diskstation2",
    "model": "DS2411+",
    "dsm": "DSM 6.2.4-25556 Update 7",
-   "up_raw": "45:4:26",
-   "up_h": 45.07388888888889,
-   "temp": 36,
+   "up_raw": "47:5:39",
+   "up_h": 47.094166666666666,
+   "temp": 37,
    "prev_temp": 39,
    "prev_uptime": "157:4:19",
    "n_disks": 24,
@@ -227,9 +227,9 @@
    "name": "Diskstation3",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "253:4:15",
-   "up_h": 253.07083333333333,
-   "temp": 38,
+   "up_raw": "255:5:15",
+   "up_h": 255.0875,
+   "temp": 39,
    "prev_temp": 41,
    "prev_uptime": "205:8:44",
    "n_disks": 24,
@@ -330,9 +330,9 @@
    "name": "Diskstation4",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "260:38:14",
-   "up_h": 260.63722222222225,
-   "temp": 40,
+   "up_raw": "262:39:15",
+   "up_h": 262.65416666666664,
+   "temp": 41,
    "prev_temp": 44,
    "prev_uptime": "157:4:11",
    "n_disks": 24,
@@ -401,7 +401,7 @@
      "id": "sda",
      "status": "not_use",
      "smart": "normal",
-     "model": "ST3000VX000-1CU1",
+     "model": "ST3000VX000-1CU166",
      "used": false
     }
    ],
@@ -421,7 +421,7 @@
     },
     {
      "sev": "medium",
-     "msg": "sda (slot 1) not_use, SMART normal, ST3000VX000-1CU1"
+     "msg": "sda (slot 1) not_use, SMART normal, ST3000VX000-1CU166"
     },
     {
      "sev": "low",

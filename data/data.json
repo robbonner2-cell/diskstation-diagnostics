@@ -1,11 +1,11 @@
 {
- "stamp": "2026-11-12T15:33:44.355715",
- "built": "2026-11-12T15:33:44.355715",
+ "stamp": "2026-11-12T16:32:04.489234",
+ "built": "2026-11-12T16:32:04.489234",
  "totals": {
   "disks": 96,
   "raw": 623.0,
   "logical": 480.4,
-  "used": 309.7
+  "used": 309.5
  },
  "boxes": [
   {
@@ -13,8 +13,8 @@
    "name": "Diskstation1",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "280:33:21",
-   "up_h": 280.55583333333334,
+   "up_raw": "281:33:6",
+   "up_h": 281.5516666666667,
    "temp": 34,
    "prev_temp": 37,
    "prev_uptime": "157:4:0",
@@ -24,7 +24,7 @@
     "volume_1": {
      "pct": 80,
      "tb": 107.5,
-     "free_tb": 21.2,
+     "free_tb": 21.3,
      "scrub": "no_action",
      "status": "normal",
      "last_done": "2019-08-22",
@@ -34,7 +34,7 @@
     "volume_2": {
      "pct": 58,
      "tb": 79.6,
-     "free_tb": 33.3,
+     "free_tb": 33.4,
      "scrub": "no_action",
      "status": "normal",
      "last_done": "2026-10-21",
@@ -105,8 +105,8 @@
    "name": "Diskstation2",
    "model": "DS2411+",
    "dsm": "DSM 6.2.4-25556 Update 7",
-   "up_raw": "72:35:26",
-   "up_h": 72.59055555555555,
+   "up_raw": "73:34:38",
+   "up_h": 73.57722222222222,
    "temp": 37,
    "prev_temp": 39,
    "prev_uptime": "157:4:19",
@@ -227,8 +227,8 @@
    "name": "Diskstation3",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "280:35:47",
-   "up_h": 280.5963888888889,
+   "up_raw": "281:34:30",
+   "up_h": 281.575,
    "temp": 40,
    "prev_temp": 41,
    "prev_uptime": "205:8:44",
@@ -330,8 +330,8 @@
    "name": "Diskstation4",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "288:9:52",
-   "up_h": 288.1644444444444,
+   "up_raw": "289:8:29",
+   "up_h": 289.1413888888889,
    "temp": 40,
    "prev_temp": 44,
    "prev_uptime": "157:4:11",

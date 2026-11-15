@@ -1,6 +1,6 @@
 {
- "stamp": "2026-11-14T20:32:29.202360",
- "built": "2026-11-14T20:32:29.202360",
+ "stamp": "2026-11-15T05:01:59.618390",
+ "built": "2026-11-15T05:01:59.618390",
  "totals": {
   "disks": 96,
   "raw": 623.0,
@@ -13,9 +13,9 @@
    "name": "Diskstation1",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "333:34:14",
-   "up_h": 333.57055555555553,
-   "temp": 33,
+   "up_raw": "342:3:11",
+   "up_h": 342.05305555555555,
+   "temp": 32,
    "prev_temp": 37,
    "prev_uptime": "157:4:0",
    "n_disks": 24,
@@ -36,7 +36,7 @@
      "tb": 79.6,
      "free_tb": 33.4,
      "scrub": "no_action",
-     "status": "normal",
+     "status": "warning",
      "last_done": "2026-10-21",
      "next": "2025-11-14",
      "failure_number": 0
@@ -65,14 +65,31 @@
      "dfn": 0
     }
    ],
-   "bad_disks": [],
+   "bad_disks": [
+    {
+     "id": "sdmc",
+     "status": "normal",
+     "smart": "failing",
+     "model": "HUH728080ALE600",
+     "used": true
+    }
+   ],
    "backups": [
     {
      "name": "Remote Archiving Backup Set 1",
      "state": "backupable"
     }
    ],
-   "findings": [],
+   "findings": [
+    {
+     "sev": "critical",
+     "msg": "volume_2 is warning (58% full)"
+    },
+    {
+     "sev": "high",
+     "msg": "sdmc (slot 3) normal, SMART failing, HUH728080ALE600"
+    }
+   ],
    "prev_vols": {
     "volume_1": {
      "id": "volume_1",
@@ -105,9 +122,9 @@
    "name": "Diskstation2",
    "model": "DS2411+",
    "dsm": "DSM 6.2.4-25556 Update 7",
-   "up_raw": "125:35:5",
-   "up_h": 125.58472222222223,
-   "temp": 36,
+   "up_raw": "134:4:38",
+   "up_h": 134.07722222222222,
+   "temp": 35,
    "prev_temp": 39,
    "prev_uptime": "157:4:19",
    "n_disks": 24,
@@ -227,9 +244,9 @@
    "name": "Diskstation3",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "333:34:49",
-   "up_h": 333.5802777777778,
-   "temp": 40,
+   "up_raw": "342:4:27",
+   "up_h": 342.07416666666666,
+   "temp": 37,
    "prev_temp": 41,
    "prev_uptime": "205:8:44",
    "n_disks": 24,
@@ -330,9 +347,9 @@
    "name": "Diskstation4",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "341:8:53",
-   "up_h": 341.1480555555556,
-   "temp": 43,
+   "up_raw": "349:38:27",
+   "up_h": 349.6408333333333,
+   "temp": 42,
    "prev_temp": 44,
    "prev_uptime": "157:4:11",
    "n_disks": 24,

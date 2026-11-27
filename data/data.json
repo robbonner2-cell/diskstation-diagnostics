@@ -1,6 +1,6 @@
 {
- "stamp": "2026-11-26T21:02:41.819849",
- "built": "2026-11-26T21:02:41.819849",
+ "stamp": "2026-11-26T21:34:35.353741",
+ "built": "2026-11-26T21:34:35.353741",
  "totals": {
   "disks": 96,
   "raw": 623.0,
@@ -13,8 +13,8 @@
    "name": "Diskstation1",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "622:3:38",
-   "up_h": 622.0605555555555,
+   "up_raw": "622:36:8",
+   "up_h": 622.6022222222222,
    "temp": 31,
    "prev_temp": 37,
    "prev_uptime": "157:4:0",
@@ -122,8 +122,8 @@
    "name": "Diskstation2",
    "model": "DS2411+",
    "dsm": "DSM 6.2.4-25556 Update 7",
-   "up_raw": "414:4:38",
-   "up_h": 414.07722222222225,
+   "up_raw": "414:36:54",
+   "up_h": 414.615,
    "temp": 34,
    "prev_temp": 39,
    "prev_uptime": "157:4:19",
@@ -244,8 +244,8 @@
    "name": "Diskstation3",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "622:5:23",
-   "up_h": 622.0897222222222,
+   "up_raw": "622:37:17",
+   "up_h": 622.6213888888889,
    "temp": 39,
    "prev_temp": 41,
    "prev_uptime": "205:8:44",
@@ -347,8 +347,8 @@
    "name": "Diskstation4",
    "model": "DS2413+",
    "dsm": "DSM 6.2.4-25556 Update 8",
-   "up_raw": "629:39:19",
-   "up_h": 629.6552777777778,
+   "up_raw": "630:11:13",
+   "up_h": 630.1869444444444,
    "temp": 41,
    "prev_temp": 44,
    "prev_uptime": "157:4:11",
@@ -359,11 +359,11 @@
      "pct": 80,
      "tb": 45.2,
      "free_tb": 9.1,
-     "scrub": "no_action",
-     "status": "normal",
+     "scrub": "abnormal",
+     "status": "degrade",
      "last_done": "2019-12-06",
      "next": "2019-10-15",
-     "failure_number": 0
+     "failure_number": 1
     },
     "volume_2": {
      "pct": 64,
@@ -382,21 +382,21 @@
      "vol": "volume_1",
      "have": 4,
      "need": 4,
-     "dfn": 0
+     "dfn": 1
     },
     {
      "raid": "/dev/md2",
      "vol": "volume_1",
-     "have": 12,
+     "have": 11,
      "need": 12,
-     "dfn": 0
+     "dfn": 1
     },
     {
      "raid": "/dev/md4",
      "vol": "volume_1",
      "have": 6,
      "need": 6,
-     "dfn": 0
+     "dfn": 1
     },
     {
      "raid": "/dev/md5",
@@ -413,9 +413,33 @@
      "dfn": 0
     }
    ],
-   "bad_disks": [],
+   "bad_disks": [
+    {
+     "id": "sda",
+     "status": "not_use",
+     "smart": "normal",
+     "model": "ST3000VX000-1CU166",
+     "used": false
+    }
+   ],
    "backups": [],
    "findings": [
+    {
+     "sev": "critical",
+     "msg": "volume_1 is degrade (80% full)"
+    },
+    {
+     "sev": "high",
+     "msg": "volume_1 scrubbingStatus=abnormal"
+    },
+    {
+     "sev": "critical",
+     "msg": "/dev/md2 has 11/12 members (in volume_1)"
+    },
+    {
+     "sev": "medium",
+     "msg": "sda (slot 1) not_use, SMART normal, ST3000VX000-1CU166"
+    },
     {
      "sev": "low",
      "msg": "no backup task defined"
